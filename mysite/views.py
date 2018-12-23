@@ -3,10 +3,15 @@
 from django.shortcuts import render
 from django.views import View
 
+
+from blog.models import HomeBanner,Blog
+
+
 class Home(View):
     def get(self, request):
-        content = {}
-        return render(request, 'index.html', content)
+        all_banner = HomeBanner.objects.all()
+        all_blog = Blog.objects.all()
+        return render(request, 'index.html', {'all_banner': all_banner, 'all_blog': all_blog})
 
 
 class About(View):
