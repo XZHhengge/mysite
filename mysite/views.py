@@ -11,7 +11,7 @@ class Home(View):
     def get(self, request):
         all_banner = HomeBanner.objects.all()
         all_blog = Blog.objects.all()
-        return render(request, 'index.html', {'all_banner': all_banner, 'all_blog': all_blog})
+        return render(request, 'index.html', {'all_banner': all_banner, 'all_blog': all_blog, 'click': 1})
 
 
 class About(View):
