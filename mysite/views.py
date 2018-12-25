@@ -11,15 +11,17 @@ class Home(View):
     def get(self, request):
         all_banner = HomeBanner.objects.all()
         all_blog = Blog.objects.all()
+        for i in all_banner:
+            print(i.title)
         return render(request, 'index.html',
-                      {'all_banner': all_banner, 'all_blog': all_blog, 'click': 1, 'titlename': 'home'})
+                      {'all_banner': all_banner, 'all_blog': all_blog, 'click': 1, 'titlename': 'Home', })
 
 
 class About(View):
 
     def get(self, request):
-        result = {}
-        return render(request, 'about.html', result)
+        return render(request, 'about.html',
+                      {'titlename': 'About'})
 
 
 class Single(View):
@@ -45,4 +47,5 @@ class Style(View):
 class Contact(View):
 
     def get(self, request):
-        return render(request, 'contact.html', {})
+        return render(request, 'contact.html',
+                      {'titlename': 'Contact'})

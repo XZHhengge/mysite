@@ -24,7 +24,7 @@ class HomeBanner(models.Model):
     author = models.CharField(max_length=30, verbose_name='作者')
     title = models.CharField(max_length=100, verbose_name='标题')
     image = models.ImageField(upload_to='homebanner/%Y/%m', verbose_name='首页轮播图', max_length=100)
-    url = models.URLField(max_length=200, verbose_name='访问地址')
+    url = models.URLField(max_length=200, verbose_name='访问地址', null=True, blank=True)
     index = models.IntegerField(default=100, verbose_name='顺序')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 

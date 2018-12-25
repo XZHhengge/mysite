@@ -3,22 +3,9 @@
 {% block content %}
                                             {#            轮播图#}
 <section class="row featured-post-carousel">
-{#    <div class="item post">#}
-{#        <img src="{% static 'images/featured-posts/1.jpg' %}" alt="" class="img-responsive main-bg">#}
-{#        <div class="post-content">#}
-{#            <div class="container">#}
-{#                <h5 class="post-meta"><i>in</i> <a href="#">Author Profile</a> | <a href="#">feb 17, 2016</a></h5>#}
-{#                <h2 class="post-title"><a href="{% url 'single' %}">Nature, in the broadest sense, is the natural, physical, or material world or universe.</a></h2>#}
-{#                <a href="{% url 'single' %}" class="btn btn-primary"><span>read more</span></a>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>    #}
+    {% for banner in all_banner %}
     <div class="item post">
-        {% for banner in all_banner %}
-            <img src="{% static 'images/featured-posts/1.jpg' %}" alt="" class="img-responsive main-bg">
-
-{#        <img src="{{ MEDIA_URL }}{{ banner.image }}" alt="" class="img-responsive main-bg">#}
-{#        <img src="{{ MEDIA_URL }}{{ banner.image.url }}" alt="" class="img-responsive main-bg">#}
+        <img src="{{ MEDIA_URL }}{{ banner.image }}" alt="" class="img-responsive main-bg">
         <div class="post-content">
             <div class="container">
                 <h5 class="post-meta"><i>in</i> <a href="#">{{ banner.author }}</a> | <a href="#">{{ banner.add_time }}</a></h5>
@@ -28,29 +15,8 @@
         </div>
     </div>
     {% endfor %}
-
-
-    <div class="item post">
-        <img src="{% static 'images/featured-posts/1-1.jpg' %}" alt="" class="img-responsive main-bg">
-        <div class="post-content">
-            <div class="container">
-                <h5 class="post-meta"><i>in</i> <a href="#">Author Profile</a> | <a href="#">feb 17, 2016</a></h5>
-                <h2 class="post-title"><a href="{% url 'single' %}">Nature, in the broadest sense, is the natural, physical, or material world or universe.</a></h2>
-                <a href="{% url 'single' %}" class="btn btn-primary"><span>read more</span></a>
-            </div>
-        </div>
-    </div>
-    <div class="item post">
-        <img src="{% static 'images/featured-posts/1-2.jpg' %}" alt="" class="img-responsive main-bg">
-        <div class="post-content">
-            <div class="container">
-                <h5 class="post-meta"><i>in</i> <a href="#">Author Profile</a> | <a href="#">feb 17, 2016</a></h5>
-                <h2 class="post-title"><a href="{% url 'single' %}">Nature, in the broadest sense, is the natural, physical, or material world or universe.</a></h2>
-                <a href="{% url 'single' %}" class="btn btn-primary"><span>read more</span></a>
-            </div>
-        </div>
-    </div>
 </section>
+
 {#                                                    主页博客div#}
 <section class="row content-wrap">
     <div class="container">
