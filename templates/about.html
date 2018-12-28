@@ -76,11 +76,11 @@
 {#                                </ul>#}
 {#                            </li>#}
 {#                            <li class="active"><a href="{% url 'about' %}">About</a></li>#}
-{#                            <li><a href="{% url 'single' %}">Blog Single 1</a></li>#}
-{#                            <li><a href="{% url 'single2' %}">Blog Single 2</a></li>#}
+{#                            <li><a href="{% url 'blog:single' blog.id %}">Blog Single 1</a></li>#}
+{#                            <li><a href="{% url 'blog:single' %}">Blog Single 2</a></li>#}
 {#                        </ul>#}
 {#                        <ul class="nav column-menu white-bg">#}
-{#                            <li><a href="{% url 'single3' %}">Blog Single 3</a></li>#}
+{#                            <li><a href="{% url 'single' %}">Blog Single 3</a></li>#}
 {##}
 {#                            <li><a href="{% url 'contact' %}">contact</a></li>#}
 {#                        </ul>#}
@@ -180,11 +180,11 @@
 {#                    <ul class="nav column-menu white-bg">#}
 {#                        <li class="active"><a href="{% url 'home' %}">Home</a></li>#}
 {#                        <li><a href="{% url 'about' %}">About</a></li>#}
-{#                        <li><a href="{% url 'single' %}">Blog Single 1</a></li>#}
-{#                        <li><a href="{% url 'single2' %}">Blog Single 2</a></li>#}
+{#                        <li><a href="{% url 'blog:single' blog.id %}">Blog Single 1</a></li>#}
+{#                        <li><a href="{% url 'blog:single' %}">Blog Single 2</a></li>#}
 {#                    </ul>#}
 {#                    <ul class="nav column-menu white-bg">#}
-{#                        <li><a href="single3">Blog Single 3</a></li>#}
+{#                        <li><a href="single">Blog Single 3</a></li>#}
 {##}
 {#                        <li><a href="{% url 'contact' %}">contact</a></li>#}
 {#                    </ul>#}

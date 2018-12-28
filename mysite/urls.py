@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include, re_path
+from django.conf.urls import url
 from django.views.static import serve
 
 from mysite import views
@@ -26,9 +27,6 @@ urlpatterns = [
     re_path('media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('about/', views.About.as_view(), name='about'),
     path('contact/', views.Contact.as_view(), name='contact'),
-    path('single/', views.Single.as_view(), name='single'),
-    path('single2/', views.Single2.as_view(), name='single2'),
-    path('single3/', views.Single3.as_view(), name='single3'),
     path('style-guide/', views.Style.as_view(), name='style'),
 
     path('blog/', include('blog.urls', namespace='blog')),

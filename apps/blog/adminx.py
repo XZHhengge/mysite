@@ -21,9 +21,9 @@ class BlogTypeAdmin(object):
     list_filter = ['type_name']
 
 class BlogAdmin(object):
-    list_display = ['title', 'blog_type', 'author', 'created_time', 'last_updated_time', 'response_count',]
-    search_fileds = ['title', 'blog_type', 'author', 'created_time', 'last_updated_time', 'response_count',]
-    list_filter = ['title', 'blog_type', 'author', 'created_time', 'last_updated_time', 'response_count',]
+    list_display = ['created_time', 'title', 'blog_type', 'author', 'response_count', 'last_updated_time', ]
+    search_fileds = ['created_time', 'title', 'blog_type', 'author', 'response_count', 'last_updated_time', ]
+    list_filter = ['created_time', 'title', 'blog_type', 'author', 'response_count', 'last_updated_time', ]
 
 
 xadmin.site.register(Myself, MyselfAdmin)

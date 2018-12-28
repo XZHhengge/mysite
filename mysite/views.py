@@ -11,10 +11,7 @@ class Home(View):
     def get(self, request):
         all_banner = HomeBanner.objects.all()
         all_blog = Blog.objects.all()
-        for i in all_banner:
-            print(i.title)
-        return render(request, 'index.html',
-                      {'all_banner': all_banner, 'all_blog': all_blog, 'click': 1, 'titlename': 'Home', })
+        return render(request, 'index.html',{'all_banner': all_banner, 'all_blog': all_blog, 'click': 1, 'titlename': 'Home',})
 
 
 class About(View):
@@ -24,20 +21,7 @@ class About(View):
                       {'titlename': 'About'})
 
 
-class Single(View):
-    def get(self, request):
 
-       return render(request, 'single.html', {})
-
-class Single2(View):
-
-    def get(self, request):
-        return render(request, 'single2.html', {})
-
-class Single3(View):
-
-    def get(self, request):
-        return render(request, 'single3.html', {})
 
 class Style(View):
     def get(self, request):

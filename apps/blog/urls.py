@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.urls import path
+from django.urls import path,re_path
 from blog import views
 
 
 app_name = "blog"
 urlpatterns=[
-    path('', views.Blog.as_view(), name='blog'),
-    path('category', views.Category.as_view(), name='category')
-    # path('<int:pk>,', views.single, name='single')
+    path('', views.BlogHome.as_view(), name='blog'),
+    path('category', views.Category.as_view(), name='category'),
+    re_path('detail/(\d+)$', views.Single.as_view(), name ='blog_detail'),
+
 ]

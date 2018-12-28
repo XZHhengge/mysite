@@ -1,9 +1,10 @@
 from django.shortcuts import render, render_to_response
 from django.views.generic.base import View
 # Create your views here.
+from blog.models import Blog
 
 
-class Blog(View):
+class BlogHome(View):
     def get(self, request):
         return render(request, 'blog.html', {})
 
@@ -11,10 +12,9 @@ class Blog(View):
 class Category(View):
     def get(self, request):
         return render(request, 'category.html', {})
-# def single2(request):
-#     render_to_response('single2.html')
-#
-#
-# def single3(request):
-#     render_to_response('single3.html')
+
+class Single(View):
+    def get(self, request, blog_id):
+        blog = Blog.objects.get(id=blog_id)
+        return render(request, 'single.html', {'blog': blog})
 
