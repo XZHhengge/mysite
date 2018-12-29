@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blog',
     'xadmin',
     'crispy_forms',
+    'pure_pagination'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysite',
-        'USER': 'debian-sys-maint',
+        'USER': 'root',
         'PASSWORD': '159874xzh',
         'HOST': '127.0.0.1'
     }
@@ -113,7 +114,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10,
+    'MARGIN_PAGES_DISPLAYED': 2,
 
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
