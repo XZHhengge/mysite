@@ -55,7 +55,8 @@ class Blog(models.Model):
     created_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图', max_length=100, null=True, blank=True)
     last_updated_time = models.DateTimeField(default=datetime.now, verbose_name='最后更新时间')
-    response_count = models.IntegerField(default='5', verbose_name='点击数')
+    response_count = models.IntegerField(default=0, verbose_name='回复数')
+    click_number = models.IntegerField(default=0, verbose_name='点击数')
     blog_url = models.CharField(max_length=50, verbose_name='博客链接', null=True, blank=True)
 
     class Meta:
@@ -63,4 +64,4 @@ class Blog(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return "<Blog: %s>" % self.title
+        return "第{0}篇{1}博客".format(self.id, self.title)

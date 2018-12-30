@@ -51,26 +51,25 @@
 
 	   	<nav id="main-nav-wrap">
 				<ul class="main-navigation sf-menu">
-					<li class="current"><a href="{% url 'blog:blog' %}" title="">Blog</a>
-{#                        <ul class="sub-menu">#}
-{#			            <li><a href="{% url 'blog:single' blog.id %}">Blog single</a></li>#}
-{#			            <li><a href="{% url 'blog:single' %}">Blog blog:single</a></li>#}
-{#			            <li><a href="{% url 'single' %}">Blog single</a></li>#}
-{#			            <li><a href="single-standard.html">Standard Post</a></li>#}
-{#			         </ul></li>#}
+                    <li><a href="{% url 'home' %}" title="">Home</a></li>
 					<li class="has-children">
-						<a href="{% url 'blog:category' %}" title="">Blog category</a>
-						<ul class="sub-menu">
-			            <li><a href="{% url 'blog:category' %}">Wordpress</a></li>
-			            <li><a href="{% url 'blog:category' %}">HTML</a></li>
-			            <li><a href="{% url 'blog:category' %}">Photography</a></li>
-			            <li><a href="{% url 'blog:category' %}">UI</a></li>
-			            <li><a href="{% url 'blog:category' %}">Mockups</a></li>
-			            <li><a href="{% url 'blog:category' %}">Branding</a></li>
+						<a href="" title="">Blog category</a>
+                        <ul class="sub-menu">
+                            {#                                导航栏遍历出分类#}
+                            {% for name in bar %}
+			            <li><a href="{% url 'blog:category' name.id %}">{{ name.type_name }}</a></li>
+                            {% endfor %}
+
 			         </ul>
 					</li>
-					<li class="has-children">
-						<a href="{% url 'home' %}" title="">Home</a>
+					<li class="has-children current">
+						<a href="{% url 'blog:blog' %}" title="">Blog</a>
+{#						<ul class="sub-menu">#}
+{#			            <li><a href="single-video.html">Video Post</a></li>#}
+{#			            <li><a href="single-audio.html">Audio Post</a></li>#}
+{#			            <li><a href="single-gallery.html">Gallery Post</a></li>#}
+{#			            <li><a href="single-standard.html">Standard Post</a></li>#}
+{#			         </ul>#}
 					</li>
 					<li><a href="{% url 'style' %}" title="">Styles</a></li>
 					<li><a href="{% url 'about' %}" title="">About</a></li>

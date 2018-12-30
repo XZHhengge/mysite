@@ -8,7 +8,8 @@
         <img src="{{ MEDIA_URL }}{{ banner.image }}" alt="" class="img-responsive main-bg">
         <div class="post-content">
             <div class="container">
-                <h5 class="post-meta"><i>in</i> <a href="#">{{ banner.author }}</a> | <a href="#">{{ banner.add_time }}</a></h5>
+                <h5 class="post-meta"><i>in</i>
+                    <a href="#">{{ banner.blog_type }}</a> | <a href="#">{{ banner.add_time }}</a></h5>
                 <h2 class="post-title"><a href="{% url 'blog:blog_detail' 5 %}">{{ banner.title }}</a></h2>
                 <a href="{{ banner.url }}" class="btn btn-primary"><span>read more</span></a>
             </div>
@@ -30,18 +31,21 @@
                 <div class="post-wrapper row">
                     <div class="featured-content row">
 {#                        <a href="{% url 'blog:blog_detail' 5 %}"><img src="{% static 'images/posts/masonry/1.jpg' %}" alt="" class="img-responsive"></a>#}
-                        <a href="{% url 'blog:blog_detail' blog.id %}"><img src="{{ MEDIA_URL }}{{ blog.image }}" alt="" class="img-responsive"></a>
+                        <a href="{% url 'blog:blog_detail' blog.id %}">
+                            <img src="{{ MEDIA_URL }}{{ blog.image }}" alt="" class="img-responsive"></a>
                     </div>
                     <div class="post-excerpt row">
                         <h5 class="post-meta">
                             <a href="#" class="date">{{ blog.last_updated_time }}</a>
-                            <span class="post-author"><i>by</i><a href="#">{{ blog.author }}</a></span>
+                            <span class="post-author"><i>by</i><a href="{% url 'blog:category' blog.blog_type_id %}">{{ blog.blog_type }}</a></span>
                         </h5>
                         <h3 class="post-title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h3>
                         <p>{{ blog.content|truncatewords:"1" }}</p>
                         <footer class="row">
-                            <h5 class="taxonomy"><i>in</i> <a href="#">image</a>, <a href="#">{{ blog.blog_type }}</a></h5>
-                            <div class="response-count"><img src="{% static 'images/comment-icon-gray.png' %}" alt="">{{ blog.response_count }}</div>
+                            <h5 class="taxonomy"><i>in</i> <a href="#">image</a>,
+                                <a href="#">{{ blog.blog_type }}</a></h5>
+                            <div class="response-count">
+                                <img src="{% static 'images/comment-icon-gray.png' %}" alt="">{{ blog.response_count }}</div>
                         </footer>
                     </div>
                 </div>

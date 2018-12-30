@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.views import View
 
 
-from blog.models import HomeBanner,Blog
+from blog.models import HomeBanner, Blog, BlogType
+
+
 
 
 class Home(View):
     def get(self, request):
         all_banner = HomeBanner.objects.all()
         all_blog = Blog.objects.all()
-        return render(request, 'index.html',{'all_banner': all_banner, 'all_blog': all_blog, 'click': 1, 'titlename': 'Home',})
+        hot_blog = all_blog.order_by("-click_number")[:5]
+
+        return render(request, 'index.html',
+                      {'all_banner': all_banner, 'all_blog': hot_blog, 'click': 1, 'titlename': 'Home',})
 
 
 class About(View):
