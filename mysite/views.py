@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.views import View
 
 
-from blog.models import HomeBanner, Blog, BlogType
+from blog.models import HomeBanner, Blog
 
 
 

@@ -42,14 +42,15 @@
     <div class="container">
         <div class="row top-header">
             <div class="col-sm-4 search-form-col">
-                <form action="#" method="get" class="search-form">
+                <form action="{% url 'blog:search' %}" method="get" class="search-form">
                     <div class="input-group">
                         {% if click == 1 %}
                             <span class="input-group-addon"><img src="{% static "images/search-icon-white.png" %}" alt=""></span>
                         {% else %}
                             <span class="input-group-addon"><img src="{% static 'images/search-icon-dark.png' %}" alt=""></span>
                         {% endif %}
-                        <input type="search" class="form-control" placeholder="search">
+                        <input type="search" class="form-control" placeholder="search" name="search">
+                    {% csrf_token %}
                     </div>
                 </form>
             </div>
@@ -85,42 +86,23 @@
                 <div class="col-sm-8 menu-col">
                     <div class="row">
                     
-                        <ul     {% if click == 1 %}
+                        <ul{% if click == 1 %}
                                     class="nav column-menu black-bg"
                                 {% else %}
                                     class="nav column-menu white-bg"
-                                {% endif %}    
-
-
-                        >
-{#                            <li class="dropdown">#}
-{#                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="caret"></span></a>#}
-{#                                <ul class="dropdown-menu">#}
-{#                                    <li><a href="{% url 'home' %}">Home Option 1</a></li>#}
-{#                                    <li><a href="{% url 'home' %}">Home Option 2</a></li>#}
-{#                                    <li><a href="{% url 'home' %}">Home Option 3</a></li>#}
-{#                                    <li><a href="{% url 'home' %}">Home Option 4</a></li>#}
-{#                                    <li><a href="{% url 'home' %}">Home Option 5</a></li>#}
-{#                                    <li><a href="{% url 'home' %}">Home Option 6</a></li>#}
-{#                                </ul>#}
-{#                            </li>#}
+                                {% endif %}>
                             <li><a href="{% url 'home' %}">Home</a></li>
                             <li><a href="{% url 'about' %}">About</a></li>
                             <li><a href="{% url 'blog:blog' %}">Blog</a></li>
                             <li><a href="{% url 'contact' %}">contact</a></li>
-
-{#                            <li><a href="{% url 'blog:single' blog.id %}">Blog Single 1</a></li>#}
-{#                            <li><a href="{% url 'blog:single' %}">Blog Single 2</a></li>#}
-{#                        </ul>#}
-{#                        <ul class="nav column-menu black-bg">#}
-{#                            <li><a href="{% url 'single' %}">Blog Single 3</a></li>#}
 
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-4 subscribe-col">
                     <h5 class="widget-title">subscribe to our newsletter.</h5>
-                    <form action="#" method="post" class="form-inline subscribe-form">
+                    <form action="" method="post" class="form-inline subscribe-form">
+                        {% csrf_token %}
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Email">
                         </div>

@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, render_to_response
 from django.views.generic.base import View
 # Create your views here.
@@ -29,9 +30,9 @@ class BlogHome(View):
 # 博客分类
 class Category(View):
     def get(self, request, id):
-
+        print(id)
         # 导航栏分类
-        bar = BlogType.objects.all()
+        # bar = BlogType.objects.all()
         # 根据id选出分类
         blog_category = Blog.objects.filter(blog_type=id)
         # 分页
@@ -42,8 +43,9 @@ class Category(View):
         name = blog_category[0].blog_type
         p = Paginator(blog_category, 10, request=request)
         blog_category = p.page(page)
+        print(12)
                                                         # 这里的blog_typ确定blog_base.html的导航栏
-        return render(request, 'category.html', {'blog_category': blog_category, 'name': name, 'bar': bar})
+        return render(request, 'category.html', {'blog_category': blog_category, 'name': name, })
 
 
 # 博客 详细页面
@@ -58,3 +60,23 @@ class Single(View):
                                                             # 这里的blog_typ确定blog_base.html的导航栏
         return render(request, 'single-standard.html', {'blog': blog_detail, 'bar': bar})
 
+
+# 全局搜索功能
+class Search(View):
+
+    def get(self, request):
+        bar = BlogType.objects.all()
+        search = request.GET.get('search','')
+        search_blog = Blog.objects.filter(Q(title__icontains=search)|Q(content__icontains=search)|Q(blog_type__type_name__icontains=search))
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(search_blog, 10, request=request)
+        search_blog = p.page(page)
+
+        return render(request, 'blog.html', {'all_blog': search_blog, 'bar':bar})
+
+    def post(self, request):
+        pass
