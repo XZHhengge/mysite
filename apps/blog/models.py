@@ -10,7 +10,7 @@ class Myself(models.Model):
     text3 = models.TextField(verbose_name='文本3')
     csdn_url = models.CharField(max_length=20, verbose_name='CSDN博客地址')
 
-    image = models.ImageField(upload_to="image/%Y/%m",verbose_name='个性图片' , max_length=100)
+    image = models.ImageField(upload_to="myself/%Y/%m",verbose_name='个性图片', max_length=100)
 
     class Meta:
         verbose_name = "个人介绍"
@@ -38,6 +38,8 @@ class HomeBanner(models.Model):
 
 class BlogType(models.Model):
     type_name = models.CharField(max_length=50, verbose_name='博客类型')
+    image = models.ImageField(upload_to='Blog_type/%Y/%m', verbose_name='分类插图', max_length=100,
+                              blank=True, null=True)
 
     class Meta:
         verbose_name = '博客类型'

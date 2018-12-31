@@ -15,10 +15,12 @@ class HomeBannerAdmin(object):
     search_fileds = ['title', 'image','url', 'index',]
     list_filter = ['title', 'image','url', 'index', 'add_time']
 
+
 class BlogTypeAdmin(object):
     list_display = ['type_name']
     search_fileds = ['type_name']
     list_filter = ['type_name']
+
 
 class BlogAdmin(object):
     list_display = ['created_time', 'title', 'blog_type', 'author', 'response_count', 'last_updated_time', ]

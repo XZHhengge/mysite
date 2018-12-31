@@ -26,6 +26,7 @@ class BlogHome(View):
         return render(request, 'blog.html', {'all_blog': all_blog })
 
 
+# 博客详细页面
 class CategoryDetail(View):
     def get(self, request, id):
         blog_category = Blog.objects.filter(blog_type=id)

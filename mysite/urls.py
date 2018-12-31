@@ -27,8 +27,6 @@ urlpatterns = [
     re_path('media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('about/', views.About.as_view(), name='about'),
     path('contact/', views.Contact.as_view(), name='contact'),
-    path('style-guide/', views.Style.as_view(), name='style'),
-
     path('blog/', include('blog.urls', namespace='blog')),
     path('xadmin/', xadmin.site.urls),
 ]

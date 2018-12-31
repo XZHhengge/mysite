@@ -6,8 +6,7 @@ from django.views import View
 from blog.models import HomeBanner, Blog
 
 
-
-
+# 主页面
 class Home(View):
     def get(self, request):
         all_banner = HomeBanner.objects.all()
@@ -18,6 +17,7 @@ class Home(View):
                       {'all_banner': all_banner, 'all_blog': hot_blog, 'click': 1, 'titlename': 'Home',})
 
 
+# 关于页面
 class About(View):
 
     def get(self, request):
@@ -25,13 +25,7 @@ class About(View):
                       {'titlename': 'About'})
 
 
-
-
-class Style(View):
-    def get(self, request):
-        return render(request, 'style-guide.html', {})
-
-
+# 联系页面
 class Contact(View):
 
     def get(self, request):
