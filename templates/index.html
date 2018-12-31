@@ -37,7 +37,7 @@
                     <div class="post-excerpt row">
                         <h5 class="post-meta">
                             <a href="#" class="date">{{ blog.last_updated_time }}</a>
-                            <span class="post-author"><i>by</i><a href="{% url 'blog:category' blog.blog_type_id %}">{{ blog.blog_type }}</a></span>
+                            <span class="post-author"><i>by</i><a href="{% url 'blog:category' %}">{{ blog.blog_type }}</a></span>
                         </h5>
                         <h3 class="post-title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h3>
                         <p>{{ blog.content|truncatewords:"1" }}</p>

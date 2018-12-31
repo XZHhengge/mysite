@@ -12,8 +12,7 @@ class BlogHome(View):
 
     def get(self, request):
         all_blog = Blog.objects.all()
-        # 导航栏分类
-        bar = BlogType.objects.all()
+
         # 分页
         try:
             page = request.GET.get('page', 1)
@@ -24,7 +23,7 @@ class BlogHome(View):
         all_blog = p.page(page)
 
                                 # 这里的bar确定blog_base.html的导航栏
-        return render(request, 'blog.html', {'all_blog': all_blog, 'bar':bar})
+        return render(request, 'blog.html', {'all_blog': all_blog })
 
 
 class CategoryDetail(View):
