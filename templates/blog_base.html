@@ -53,14 +53,14 @@
 				<ul class="main-navigation sf-menu">
                     <li><a href="{% url 'home' %}" title="">Home</a></li>
 					<li class="has-children">
-						<a href="" title="">Blog category</a>
-                        <ul class="sub-menu">
+						<a href="{% url 'blog:category' %}" title="">Blog category</a>
+{#                        <ul class="sub-menu">#}
                             {#                                导航栏遍历出分类#}
-                            {% for name in bar %}
-			            <li><a href="{% url 'blog:category' name.id %}">{{ name.type_name }}</a></li>
-                            {% endfor %}
-
-			         </ul>
+{#                            {% for name in bar %}#}
+{#			            <li><a href="{% url 'blog:category' name.id %}">{{ name.type_name }}</a></li>#}
+{#                            {% endfor %}#}
+{##}
+{#			         </ul>#}
 					</li>
 					<li class="has-children current">
 						<a href="{% url 'blog:blog' %}" title="">Blog</a>

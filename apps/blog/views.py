@@ -27,14 +27,14 @@ class BlogHome(View):
         return render(request, 'blog.html', {'all_blog': all_blog, 'bar':bar})
 
 
-# 博客分类
-class Category(View):
+class CategoryDetail(View):
     def get(self, request, id):
-        print(id)
-        # 导航栏分类
-        # bar = BlogType.objects.all()
-        # 根据id选出分类
         blog_category = Blog.objects.filter(blog_type=id)
+        # for i in blog_category:
+        #     print(type(i.image.path))
+        # print(len(blog_category[0].image))
+        # print(isinstance(blog_category[0].image, None))
+        # assert blog_category[0].image == None
         # 分页
         try:
             page = request.GET.get('page', 1)
@@ -43,22 +43,37 @@ class Category(View):
         name = blog_category[0].blog_type
         p = Paginator(blog_category, 10, request=request)
         blog_category = p.page(page)
-        print(12)
                                                         # 这里的blog_typ确定blog_base.html的导航栏
-        return render(request, 'category.html', {'blog_category': blog_category, 'name': name, })
+        return render(request, 'category.html', {'blog_category': blog_category, 'name': name})
+
+
+# 博客分类
+class Category(View):
+    def get(self, request):
+        blog_category = BlogType.objects.all()
+        # for i in blog_category:
+        #     print(type(i.image.path))
+        # print(len(blog_category[0].image))
+        # print(isinstance(blog_category[0].image, None))
+        # assert blog_category[0].image == None
+        # 分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(blog_category, 10, request=request)
+        blog_category = p.page(page)
+        return render(request, 'blog-category.html', {'blog_category': blog_category})
 
 
 # 博客 详细页面
 class Single(View):
 
     def get(self, request, id):
-        # 导航栏分类
-        bar = BlogType.objects.all()
 
         # 根据id选出该id的博客
         blog_detail = Blog.objects.get(id=id)
-                                                            # 这里的blog_typ确定blog_base.html的导航栏
-        return render(request, 'single-standard.html', {'blog': blog_detail, 'bar': bar})
+        return render(request, 'single-standard.html', {'blog': blog_detail})
 
 
 # 全局搜索功能

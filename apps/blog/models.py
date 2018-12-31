@@ -53,7 +53,8 @@ class Blog(models.Model):
     content = models.TextField(verbose_name='内容')
     author = models.CharField(max_length=100, default='博主', verbose_name='作者')
     created_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
-    image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图', max_length=100, null=True, blank=True)
+    image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图',
+                              max_length=100, null=True, blank=True)
     last_updated_time = models.DateTimeField(default=datetime.now, verbose_name='最后更新时间')
     response_count = models.IntegerField(default=0, verbose_name='回复数')
     click_number = models.IntegerField(default=0, verbose_name='点击数')

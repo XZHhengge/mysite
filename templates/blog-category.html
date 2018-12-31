@@ -1,0 +1,44 @@
+{% extends 'blog_base.html' %}
+{% load staticfiles %}
+{% block title %}
+
+   <section id="page-header">
+   	<div class="row current-cat">
+   		<div class="col-full">
+   			<h1>Blog Category</h1>
+   		</div>
+   	</div>
+   </section>
+<br>
+  <main>
+                          {# 用循环到处选中分类的博客           #}
+            {% for category in blog_category.object_list %}
+    <div class='items'>
+      <div class='item'>
+        <svg preserveAspectRatio='xMidYMid slice' viewBox='0 0 300 200'>
+          <defs>
+            <clipPath id='clip-0'>
+              <circle cx='0' cy='0' fill='#000' r='150px'></circle>
+            </clipPath>
+          </defs>
+          <text class='svg-text' dy='.3em' x='50%' y='50%'>
+            {{ category.blog_type }}
+          </text>
+          <g clip-path='url{% url 'about' %}'>
+            <image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'
+                   xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image>
+            <text class='svg-masked-text' dy='.3em' x='50%' y='50%'>
+            {{ category.blog_type }}
+            </text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  {% endfor %}
+  </main>
+
+    <link rel="stylesheet" href="{% static 'css/category-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/category-1.css' %}">
+    <script src="{% static 'js/category-index.js' %}"></script>
+
+{% endblock %}
