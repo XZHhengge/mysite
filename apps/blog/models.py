@@ -10,7 +10,8 @@ class Myself(models.Model):
     text3 = models.TextField(verbose_name='文本3')
     csdn_url = models.CharField(max_length=20, verbose_name='CSDN博客地址')
 
-    image = models.ImageField(upload_to="myself/%Y/%m",verbose_name='个性图片', max_length=100)
+    image = models.ImageField(upload_to="myself/%Y/%m",
+                              verbose_name='个性图片', max_length=100, null=True, blank=True)
 
     class Meta:
         verbose_name = "个人介绍"
@@ -23,7 +24,7 @@ class Myself(models.Model):
 class HomeBanner(models.Model):
     author = models.CharField(max_length=30, verbose_name='作者')
     title = models.CharField(max_length=100, verbose_name='标题')
-    image = models.ImageField(upload_to='homebanner/%Y/%m', verbose_name='首页轮播图', max_length=100)
+    image = models.ImageField(upload_to='homebanner/%Y/%m', verbose_name='首页轮播图', max_length=100, null=True, blank=True)
     url = models.URLField(max_length=200, verbose_name='访问地址', null=True, blank=True)
     index = models.IntegerField(default=100, verbose_name='顺序')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
