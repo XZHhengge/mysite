@@ -1,5 +1,7 @@
 {% extends 'blog_base.html' %}
 {% load staticfiles %}
+{#这里的mytag是我自己定义的模板标签，在blog的templatetags的里面#}
+{% load mytag %}
 {% block title %}
    <section id="page-header">
    	<div class="row current-cat">
@@ -10,36 +12,69 @@
    </section>
 
 <div class="container">
-
-  <main>
-{#                循环遍历出博客类型#}
+ <main>
 
     <div class='items'>
-                                          {% for category in  blog_category.object_list %}
+            {% for category in  blog_category.object_list %}
 
       <div class='item'>
 
         <svg preserveAspectRatio='xMidYMid slice' viewBox='0 0 300 200'>
-          <defs>
-            <clipPath id='clip-0'>
+
+            <defs>
+            <clipPath id='clip-{{ category.id|subtract:"1" }}'>
               <circle cx='0' cy='0' fill='#000' r='150px'></circle>
             </clipPath>
           </defs>
           <text class='svg-text' dy='.3em' x='50%' y='50%'>
-{{ category.blog_type }}          </text>
-          <g clip-path='url(#clip-0)'>
-            <a href="{% url 'blog:category-detail' category.id %}"><image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'
-                   xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image></a>
+            X-rays
+          </text>
+          <g clip-path='url(#clip-{{ category.id|subtract:"1" }})'>
+            <a href="{% url 'blog:category-detail' category.id %}">
+                <image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'
+                       xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image></a>
             <text class='svg-masked-text' dy='.3em' x='50%' y='50%'>
-{{ category.blog_type }}            </text>
+              X-rays
+            </text>
+
           </g>
+
         </svg>
+
       </div>
-                  {% endfor %}
+                                                                                    {% endfor %}
 
     </div>
 
+
   </main>
+
+{#  <main>#}
+{#                循环遍历出博客类型#}
+{##}
+{#    <div class='items'>#}
+{##}
+{#      <div class='item'>#}
+{##}
+{#        <svg preserveAspectRatio='xMidYMid slice' viewBox='0 0 300 200'>#}
+{#          <defs>#}
+{#            <clipPath id='clip-{{ category.id }}'>#}
+{#              <circle cx='0' cy='0' fill='#000' r='150px'></circle>#}
+{#            </clipPath>#}
+{#          </defs>#}
+{#          <text class='svg-text' dy='.3em' x='50%' y='50%'>#}
+{#{{ category.blog_type }}          </text>#}
+{#          <g clip-path='url(#clip-{{ category.id }})'>#}
+{#            <a href=""><image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'#}
+{#                   xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image></a>#}
+{#            <text class='svg-masked-text' dy='.3em' x='50%' y='50%'>#}
+{#{{ category.blog_type }}            </text>#}
+{#          </g>#}
+{#        </svg>#}
+{#      </div>#}
+{##}
+{##}
+
 
 </div>
 
