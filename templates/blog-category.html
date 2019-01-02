@@ -3,6 +3,9 @@
 {#这里的mytag是我自己定义的模板标签，在blog的templatetags的里面#}
 {% load mytag %}
 {% block title %}
+
+    <link href='{% static 'css/category-1.css' %}' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/category-style.css' %}">
    <section id="page-header">
    	<div class="row current-cat">
    		<div class="col-full">
@@ -10,7 +13,6 @@
    		</div>
    	</div>
    </section>
-
 <div class="container">
  <main>
 
@@ -22,60 +24,27 @@
         <svg preserveAspectRatio='xMidYMid slice' viewBox='0 0 300 200'>
 
             <defs>
+                {#    caregory的id 减去1，否则前端js功能不完整            #}
             <clipPath id='clip-{{ category.id|subtract:"1" }}'>
               <circle cx='0' cy='0' fill='#000' r='150px'></circle>
             </clipPath>
           </defs>
           <text class='svg-text' dy='.3em' x='50%' y='50%'>
-            X-rays
+            {{ category.type_name  }}
           </text>
           <g clip-path='url(#clip-{{ category.id|subtract:"1" }})'>
             <a href="{% url 'blog:category-detail' category.id %}">
                 <image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'
                        xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image></a>
             <text class='svg-masked-text' dy='.3em' x='50%' y='50%'>
-              X-rays
+            {{ category.type_name  }}
             </text>
-
           </g>
-
         </svg>
-
       </div>
-                                                                                    {% endfor %}
-
+            {% endfor %}
     </div>
-
-
   </main>
-
-{#  <main>#}
-{#                循环遍历出博客类型#}
-{##}
-{#    <div class='items'>#}
-{##}
-{#      <div class='item'>#}
-{##}
-{#        <svg preserveAspectRatio='xMidYMid slice' viewBox='0 0 300 200'>#}
-{#          <defs>#}
-{#            <clipPath id='clip-{{ category.id }}'>#}
-{#              <circle cx='0' cy='0' fill='#000' r='150px'></circle>#}
-{#            </clipPath>#}
-{#          </defs>#}
-{#          <text class='svg-text' dy='.3em' x='50%' y='50%'>#}
-{#{{ category.blog_type }}          </text>#}
-{#          <g clip-path='url(#clip-{{ category.id }})'>#}
-{#            <a href=""><image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'#}
-{#                   xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image></a>#}
-{#            <text class='svg-masked-text' dy='.3em' x='50%' y='50%'>#}
-{#{{ category.blog_type }}            </text>#}
-{#          </g>#}
-{#        </svg>#}
-{#      </div>#}
-{##}
-{##}
-
-
 </div>
 
     <script src="{% static 'js/category-index.js' %}"></script>

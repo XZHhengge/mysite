@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, render_to_response
 from django.views.generic.base import View
 # Create your views here.
-from blog.models import Blog, BlogType
+from blog.models import Blog, BlogType, BolgBanner
 
 from pure_pagination import Paginator, PageNotAnInteger
 
@@ -12,7 +12,8 @@ class BlogHome(View):
 
     def get(self, request):
         all_blog = Blog.objects.all()
-
+        # 博客轮播图
+        blog_banner = BolgBanner.objects.all()
         # 分页
         try:
             page = request.GET.get('page', 1)
@@ -22,8 +23,7 @@ class BlogHome(View):
         p = Paginator(all_blog, 10, request=request)
         all_blog = p.page(page)
 
-                                # 这里的bar确定blog_base.html的导航栏
-        return render(request, 'blog.html', {'all_blog': all_blog })
+        return render(request, 'blog.html', {'all_blog': all_blog, 'blog_banner':blog_banner})
 
 
 # 博客详细页面

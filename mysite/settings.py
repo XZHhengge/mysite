@@ -77,8 +77,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-
-
+# 继承django默认User。
+AUTH_USER_MODEL = "blog.UserProfile"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 

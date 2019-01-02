@@ -16,64 +16,21 @@
          		<div class="entry-content">
          			<div id="featured-post-slider" class="flexslider">
 			   			<ul class="slides">
-
+                            {% for banner in blog_banner %}
 				   			<li>
 				   				<div class="featured-post-slide">
-
-						   			<div class="post-background" style="background-image:url({% static 'images/thumbs/featured/featured-1.jpg' %});"></div>
-
-								   	<div class="overlay"></div>			   		
-
+						   			<div class="post-background" style="background-image:url({{ MEDIA_URL }}{{ banner.image }});"></div>
+								   	<div class="overlay"></div>
 								   	<div class="post-content">
 								   		<ul class="entry-meta">
-												<li>September 06, 2016</li> 
-												<li><a href="#" >Naruto Uzumaki</a></li>				
-											</ul>	
-
-								   		<h1 class="slide-title"><a href="{% url 'blog:blog' %}" title="">Minimalism Never Goes Out of Style</a></h1> 
-								   	</div> 				   					  
-				   			
+												<li>{{ banner.author }}</li>
+											</ul>
+{#								   		<h1 class="slide-title"><a href="{% url 'blog:blog' %}" title=""></a></h1>#}
+								   		<h1 class="slide-title">{{ banner.title }}</h1>
+								   	</div>
 				   				</div>
 				   			</li> <!-- /slide -->
-
-				   			<li>
-				   				<div class="featured-post-slide">
-
-						   			<div class="post-background" style="background-image:url({% static 'images/thumbs/featured/featured-2.jpg' %});"></div>
-
-								   	<div class="overlay"></div>			   		
-
-								   	<div class="post-content">
-								   		<ul class="entry-meta">
-												<li>August 29, 2016</li>
-												<li><a href="#">Sasuke Uchiha</a></li>					
-											</ul>	
-
-								   		<h1 class="slide-title"><a href="{% url 'blog:blog' %}" title="">Enhancing Your Designs with Negative Space</a></h1>
-						   			</div>		   				   					  
-				   			
-				   				</div>
-				   			</li> <!-- /slide -->
-
-				   			<li>
-				   				<div class="featured-post-slide">
-
-						   			<div class="post-background" style="background-image:url({% static 'images/thumbs/featured/featured-3.jpg' %});;"></div>
-
-								   	<div class="overlay"></div>			   		
-
-								   	<div class="post-content">
-								   		<ul class="entry-meta">
-												<li>August 27, 2016</li>
-												<li><a href="#" class="author">Naruto Uzumaki</a></li>					
-											</ul>	
-
-								   		<h1 class="slide-title"><a href="{% url 'blog:blog' %}" title="">Music Album Cover Designs for Inspiration</a></h1>
-						   			</div>
-
-				   				</div>
-				   			</li> <!-- end slide -->
-
+                            {% endfor %}
 				   		</ul> <!-- end slides -->
 				   	</div> <!-- end featured-post-slider -->        			
          		</div> <!-- end entry content -->         		
