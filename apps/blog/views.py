@@ -1,8 +1,8 @@
 from django.db.models import Q
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.views.generic.base import View
 # Create your views here.
-from blog.models import Blog, BlogType, BolgBanner
+from blog.models import Blog, BlogType, BolgBanner, UserProfile
 
 from pure_pagination import Paginator, PageNotAnInteger
 
@@ -23,7 +23,7 @@ class BlogHome(View):
         p = Paginator(all_blog, 10, request=request)
         all_blog = p.page(page)
 
-        return render(request, 'blog.html', {'all_blog': all_blog, 'blog_banner':blog_banner})
+        return render(request, 'blog.html', {'all_blog': all_blog, 'blog_banner': blog_banner, 'user':user})
 
 
 # 博客详细页面
@@ -43,7 +43,6 @@ class CategoryDetail(View):
         name = blog_category[0].blog_type
         p = Paginator(blog_category, 10, request=request)
         blog_category = p.page(page)
-                                                        # 这里的blog_typ确定blog_base.html的导航栏
         return render(request, 'category.html', {'blog_category': blog_category, 'name': name})
 
 
@@ -51,11 +50,6 @@ class CategoryDetail(View):
 class Category(View):
     def get(self, request):
         blog_category = BlogType.objects.all()
-        # for i in blog_category:
-        #     print(type(i.image.path))
-        # print(len(blog_category[0].image))
-        # print(isinstance(blog_category[0].image, None))
-        # assert blog_category[0].image == None
         # 分页
         try:
             page = request.GET.get('page', 1)

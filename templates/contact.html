@@ -1,7 +1,8 @@
-﻿{% extends 'home_base.html' %}
+﻿
+{% extends 'home_base.html' %}
+
 {% load staticfiles %}
 {% block content %}
-
 
 <section class="row page-content-wrap">
     <div class="container">
@@ -10,9 +11,12 @@
             <div class="col-md-8 page-contents">
                 <div class="row page-content">
                     <div class="contents row">
-                        <h4>Mark Samder, lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h4>
+                        <h4></h4>
                     
-                        <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>It has survived not only five centuries,
+                            but also the leap into electronic typesetting,
+                            remaining essentially unchanged. It was popularised in the
+                            1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         <br>
                         <form action="#" method="post" class="contact-form row">
                             <div class="form-group col-sm-6">
@@ -47,10 +51,12 @@
                 <!--Author Widget-->
                 <aside class="row m0 widget-author widget has-pt">
                     <div class="widget-author-inner row">
-                        <div class="author-avatar row"><a href="#"><img src="{% static 'images/author.png' %}" alt="" class="img-circle"></a></div>
+                        <div class="author-avatar row"><a href="#"><img src="{% static 'images/author.png' %}" alt=""
+                                                                        class="img-circle"></a></div>
                         <a href="#"><h2 class="author-name">Mark Sanders</h2></a>
                         <h5 class="author-title">small title</h5>
-                        <p>The word nature is derived from the Latin word natura, or "essential qualities, innate disposition", and in ancient times, literally meant "birth".</p>
+                        <p>The word nature is derived from the Latin word natura,
+                            or "essential qualities, innate disposition", and in ancient times, literally meant "birth".</p>
                         <a href="#" class="know-more">know more</a>
                     </div>
                     <ul class="nav social-nav">
@@ -61,28 +67,25 @@
                         <li><a href="#"><i class="fa fa-envelope"></i></a></li>
                     </ul>
                 </aside>
+                                {% block widget %}
+                    {% endblock %}
+            {% include 'base_widget.html' %}
                 <!--Twitter Widget-->
-                <aside class="row m0 widget widget-twitter">
-                    <div class="widget-twitter-inner">
-                        <h5 class="widget-meta"><i class="fa fa-twitter"></i>Twitter feed <a href="http://twitter.com/chivalricblog">@chivalricblog</a></h5>
-                        <div class="row tweet-texts">
-                            <p>Check out new post on my blog <a href="http://twitter.com/#natureshot">#natureshot</a> <a href="http://bit.ly/blog">http://bit.ly/blog</a></p>
-                        </div>
-                        <div class="row timepast">1 day ago</div>
-                    </div>
-                </aside>
-                <!--Instagram Widget-->
-                <aside class="row m0 widget widget-instagram">
-                    <div class="widget-instagram-inner">
-                        <h5 class="widget-meta"><i class="fa fa-twitter"></i>instagram feed <a href="http://twitter.com/chivalricblog">@chivalricblog</a></h5>
-                        <div id="instafeed"></div>
-                    </div>
-                </aside>
-                <aside class="row m0 widget widget-facebook">
-                    <div class="widget-inner widget-facebook-inner">
-                        <a href="#" class="facebook-link"><i class="fa fa-facebook-square"></i>find us on facebook</a>
-                    </div>
-                </aside>
+{#                {{ for card in cards }}#}
+{#                <aside class="row m0 widget widget-twitter">#}
+{#                    <div class="widget-twitter-inner">#}
+{#                        <h5 class="widget-meta"><i class="fa fa-twitter"></i>Twitter feed#}
+{#                            <a href="http://twitter.com/chivalricblog">@chivalricblog</a></h5>#}
+{#                        <div class="row tweet-texts">#}
+{#                            <p>Check out new post on my blog#}
+{#                                <a href="http://twitter.com/#natureshot">#natureshot</a>#}
+{#                                <a href="http://bit.ly/blog">http://bit.ly/blog</a></p>#}
+{#                        </div>#}
+{#                        <div class="row timepast">1 day ago</div>#}
+{#                    </div>#}
+{#                </aside>#}
+
+
             </div>
         </div>
     </div>

@@ -7,9 +7,9 @@ from django.db import models
 
 # 个人信息
 class UserProfile(AbstractUser):
-    text1 = models.TextField(verbose_name='文本1',null=True)
-    text2 = models.TextField(verbose_name='文本2',null=True)
-    text3 = models.TextField(verbose_name='文本3',null=True)
+    text1 = models.TextField(verbose_name='文本1', blank=True)
+    text2 = models.TextField(verbose_name='文本2', blank=True)
+    text3 = models.TextField(verbose_name='文本3', blank=True)
     image = models.ImageField(upload_to="myself/%Y/%m",
                               verbose_name='个性图片', max_length=100, null=True, blank=True)
 
@@ -23,8 +23,8 @@ class UserProfile(AbstractUser):
 
 
 class HomeBanner(models.Model):
-    author = models.CharField(max_length=30, verbose_name='作者', null=True, blank=True)
-    title = models.CharField(max_length=100, verbose_name='标题', null=True, blank=True)
+    author = models.CharField(max_length=30, verbose_name='作者', blank=True)
+    title = models.CharField(max_length=100, verbose_name='标题', blank=True)
     image = models.ImageField(upload_to='homebanner/%Y/%m', verbose_name='首页轮播图',
                               max_length=100, null=True, blank=True)
     url = models.URLField(max_length=200, verbose_name='访问地址', null=True, blank=True)
@@ -34,7 +34,6 @@ class HomeBanner(models.Model):
     class Meta:
         verbose_name = '首页轮播图'
         verbose_name_plural = verbose_name
-        ordering = ['-id']
 
     def __str__(self):
         return '{}(位于第{})'.format(self.title, self.index)
@@ -42,24 +41,23 @@ class HomeBanner(models.Model):
 
 # 博客轮播图
 class BolgBanner(models.Model):
-    author = models.CharField(max_length=30, verbose_name='作者', null=True, blank=True)
-    title = models.CharField(max_length=100, verbose_name='标题', null=True, blank=True)
+    author = models.CharField(max_length=30, verbose_name='作者', blank=True)
+    title = models.CharField(max_length=100, verbose_name='标题', blank=True)
     image = models.ImageField(upload_to='blog_banner/%Y/%m', verbose_name='博客轮播图',
-                              max_length=100, null=True, blank=True)
+                              max_length=100, blank=True)
     index = models.IntegerField(default=100, verbose_name='顺序')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
         verbose_name = '博客轮播图'
         verbose_name_plural = verbose_name
-        ordering = ['-id']
 
     def __str__(self):
         return '{}(位于第{})'.format(self.title, self.index)
 
 
 class BlogType(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, null=True, verbose_name="用户名")
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, verbose_name="用户名")
     type_name = models.CharField(max_length=50, verbose_name='博客类型')
     image = models.ImageField(upload_to='Blog_type/%Y/%m', verbose_name='分类插图', max_length=100,
                               blank=True, null=True)
@@ -67,25 +65,24 @@ class BlogType(models.Model):
     class Meta:
         verbose_name = '博客类型'
         verbose_name_plural = verbose_name
-        ordering = ['-id']
 
     def __str__(self):
         return self.type_name
 
 
 class Blog(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, null=True, verbose_name="用户名")
-    author = models.CharField(max_length=30, verbose_name='作者', null=True, blank=True)
-    title = models.TextField(verbose_name='标题', null=True, blank=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, verbose_name="用户名")
+    author = models.CharField(max_length=30, verbose_name='作者', blank=True)
+    title = models.TextField(verbose_name='标题', blank=True)
     blog_type = models.ForeignKey(BlogType,on_delete=models.DO_NOTHING, verbose_name='博客类型')
-    content = models.TextField(verbose_name='内容', null=True, blank=True)
+    content = models.TextField(verbose_name='内容', blank=True)
     created_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图',
                               max_length=100, null=True, blank=True)
     last_updated_time = models.DateTimeField(default=datetime.now, verbose_name='最后更新时间')
     response_count = models.IntegerField(default=0, verbose_name='回复数')
     click_number = models.IntegerField(default=0, verbose_name='点击数')
-    blog_url = models.CharField(max_length=50, verbose_name='博客链接', null=True, blank=True)
+    blog_url = models.CharField(max_length=50, verbose_name='博客链接', blank=True)
 
     class Meta:
         verbose_name = '博客'
@@ -98,15 +95,14 @@ class Blog(models.Model):
 
 # 个人卡片
 class PersonCard(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, null=True, verbose_name="用户名")
-    card_name = models.CharField(verbose_name='卡片名字', null=True, blank=True, max_length=30)
-    card_title = models.CharField(max_length=150, verbose_name='卡片说明', null=True, blank=True)
-    card_url = models.CharField(max_length=150, verbose_name='卡片地址', null=True, blank=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, verbose_name="用户名")
+    card_name = models.CharField(verbose_name='卡片名字',  blank=True, max_length=30)
+    card_title = models.CharField(max_length=150, verbose_name='卡片说明', blank=True)
+    card_url = models.CharField(max_length=150, verbose_name='卡片地址',  blank=True)
 
     class Meta:
-        verbose_name = '博客类型'
+        verbose_name = '个人卡片'
         verbose_name_plural = verbose_name
-        ordering = ['-id']
 
     def __str__(self):
         return self.user.username

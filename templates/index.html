@@ -54,58 +54,62 @@
 
 
                                 <!--Author Widget-->
-            <aside class="col-sm-4 widget-author widget widget-with-posts post">
-                <div class="widget-author-inner row">
-                    <div class="author-avatar row"><a href="#"><img src="{% static 'images/author.png' %}" alt="" class="img-circle"></a></div>
-                    <a href="#"><h2 class="author-name">Mark Sanders</h2></a>
-                    <h5 class="author-title">small title</h5>
-                    <p>The word nature is derived from the Latin word natura, or "essential qualities, innate disposition", and in ancient times, literally meant "birth".</p>
-                    <a href="#" class="know-more">know more</a>
-                </div>
-                <ul class="nav social-nav">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-facebook-official"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                </ul>
-            </aside>
+<aside class="col-sm-4 widget-author widget widget-with-posts post">
+    <div class="widget-author-inner row">
+        <div class="author-avatar row"><a href="{% url 'about' %}"><img src="{{ MEDIA_URL }}{{ user.image }}" alt="" class="img-circle"></a></div>
+        <a href="{% url 'about' %}"><h2 class="author-name">{{ user.first_name }} {{ user.last_name }}</h2></a>
+        <h5 class="author-title">关于我</h5>
+        <p>{{ user.text1 }}</p>
+        <a href="{% url 'about' %}" class="know-more">know more</a>
+    </div>
+    <ul class="nav social-nav">
+        <li><a href="#"><i class="fa fa-qq"></i></a></li>
+        <li><a href="#"><i class="fa fa-wechat"></i></a></li>
+        <li><a href="#"><i class="fa fa-weibo"></i></a></li>
+        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+    </ul>
+</aside>
+                            {% include 'base_widget.html' %}
 
-                                <!--Twitter Widget-->
-            <aside class="col-sm-4 widget widget-twitter widget-with-posts post">
-                <div class="widget-twitter-inner">
-                    <h5 class="widget-meta"><i class="fa fa-twitter"></i>Twitter feed</h5>
-                    <div class="row tweet-texts">
-                        <p>Check out new post on my blog</p>
-                    </div>
-                    <div class="row timepast">1 day ago</div>
-                </div>
-            </aside>
+{#                                <!--Twitter Widget-->#}
+{#        {% for card in cards %}#}
+{#<aside class="col-sm-4 widget widget-twitter widget-with-posts post">#}
+{#    <div class="widget-twitter-inner">#}
+{#        <h5 class="widget-meta"><i class="fa fa-twitter"></i>{{ card.card_name }}</h5>#}
+{#        <div class="row tweet-texts">#}
+{#            <p>Check out new post on my blog</p>#}
+{#            <p><a href="{{ card.card_url }}">{{ card.card_title }}</a></p>#}
+{#        </div>#}
+{#        <div class="row timepast">1 day ago</div>#}
+{#    </div>#}
+{#</aside>#}
+{#{% endfor %}#}
             <!--Blog Post-->
-            <article class="col-sm-4 post post-masonry post-format-quote">
-                <div class="post-wrapper row">
-                    <div class="post-excerpt row">
-                        <h5 class="post-meta">
-                            <a href="#" class="date">feb 17, 2016</a>
-                            <span class="post-author"><i>by</i><a href="#">Mark Sanders</a></span>
-                        </h5>
-                        <h3 class="post-title">If everybody learns this simple art of loving his work, whatever it is, enjoying it without asking for any recognition, we would have more beautiful and celebrating world.</h3>
-                        <h5 class="quote-maker"><a href="#">osho</a></h5>
-                        <footer class="row">
-                            <h5 class="taxonomy"><i>in</i> <a href="#">quote</a>, <a href="#">life</a></h5>
-                            <div class="response-count"><img src="{% static 'images/comment-icon-white.png' %}" alt="">5</div>
-                        </footer>
-                    </div>
-                </div>
-            </article>
+{#            <article class="col-sm-4 post post-masonry post-format-quote">#}
+{#                <div class="post-wrapper row">#}
+{#                    <div class="post-excerpt row">#}
+{#                        <h5 class="post-meta">#}
+{#                            <a href="#" class="date">feb 17, 2016</a>#}
+{#                            <span class="post-author"><i>by</i><a href="#">Mark Sanders</a></span>#}
+{#                        </h5>#}
+{#                        <h3 class="post-title">If everybody learns this simple art of loving his work, whatever it is, enjoying it without asking for any recognition, we would have more beautiful and celebrating world.</h3>#}
+{#                        <h5 class="quote-maker"><a href="#">osho</a></h5>#}
+{#                        <footer class="row">#}
+{#                            <h5 class="taxonomy"><i>in</i> <a href="#">quote</a>, <a href="#">life</a></h5>#}
+{#                            <div class="response-count"><img src="{% static 'images/comment-icon-white.png' %}" alt="">5</div>#}
+{#                        </footer>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </article>#}
 
             <!--Twitter Widget-->
-            <aside class="col-sm-4 widget widget-instagram widget-with-posts post">
-                <div class="widget-instagram-inner">
-                    <h5 class="widget-meta"><i class="fa fa-twitter"></i>instagram feed chivalricblog</h5>
-                    <div id="instafeed"></div>
-                </div>
-            </aside>
+{#            <aside class="col-sm-4 widget widget-instagram widget-with-posts post">#}
+{#                <div class="widget-instagram-inner">#}
+{#                    <h5 class="widget-meta"><i class="fa fa-twitter"></i>instagram feed chivalricblog</h5>#}
+{#                    <div id="instafeed"></div>#}
+{#                </div>#}
+{#            </aside>#}
         </div>
     </div>
 </section>

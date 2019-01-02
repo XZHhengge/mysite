@@ -1,0 +1,14 @@
+{#{% load staticfiles %}#}
+ <!--Twitter Widget-->
+        {% for card in cards %}
+<aside class="col-sm-4 widget widget-twitter widget-with-posts post">
+    <div class="widget-twitter-inner">
+        <h5 class="widget-meta"><i class="fa fa-twitter"></i>{{ card.card_name }}</h5>
+        <div class="row tweet-texts">
+{#            <p>Check out new post on my blog</p>#}
+            <p><a href="{{ card.card_url }}">{{ card.card_title }}</a></p>
+        </div>
+        <div class="row timepast">1 day ago</div>
+    </div>
+</aside>
+{% endfor %}

@@ -42,8 +42,8 @@ class PeronalCardAdmin(object):
     list_filter = ['user', 'card_name', 'card_title']
 
 
-xadmin.site.register(PersonCard, PeronalCardAdmin)
 xadmin.site.register(HomeBanner, HomeBannerAdmin)
 xadmin.site.register(BlogType, BlogTypeAdmin)
 xadmin.site.register(Blog, BlogAdmin)
 xadmin.site.register(BolgBanner, BlogBannerAdmin)
+xadmin.site.register(PersonCard, PeronalCardAdmin)

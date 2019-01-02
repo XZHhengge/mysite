@@ -35,7 +35,7 @@
           <g clip-path='url(#clip-{{ category.id|subtract:"1" }})'>
             <a href="{% url 'blog:category-detail' category.id %}">
                 <image height='100%' preserveAspectRatio='xMinYMin slice' width='100%'
-                       xlink:href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/i-xrays.png'></image></a>
+                       xlink:href='{{ MEDIA_URL }}{{ category.image }}'></image></a>
             <text class='svg-masked-text' dy='.3em' x='50%' y='50%'>
             {{ category.type_name  }}
             </text>
