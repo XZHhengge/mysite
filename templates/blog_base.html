@@ -63,14 +63,14 @@
 
 			<div class="search-wrap">
 
-				<form role="search" method="get" class="search-form" action="#">
+				<form role="search" method="get" class="search-form" action="{% url 'blog:search' %}">
 					<label>
 						<span class="hide-content">Search for:</span>
-						<input type="search" class="search-field" placeholder="Type Your Keywords" value="" name="s" title="Search for:" autocomplete="off">
+						<input type="search" class="search-field" placeholder="Type Your Keywords" value="" name="search" title="Search for:" autocomplete="off">
 					</label>
 					<input type="submit" class="search-submit" value="Search">
 				</form>
-
+                    {% csrf_token %}
 				<a href="#" id="close-search" class="close-btn">Close</a>
 
 			</div> <!-- end search wrap -->

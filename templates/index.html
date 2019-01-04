@@ -37,7 +37,7 @@
                     <div class="post-excerpt row">
                         <h5 class="post-meta">
                             <a href="#" class="date">{{ blog.last_updated_time }}</a>
-                            <span class="post-author"><i>by</i><a href="{% url 'blog:category' %}">{{ blog.blog_type }}</a></span>
+                            <span class="post-author"><i>by</i><a href="{% url 'blog:category' %}">{{ blog.author }}</a></span>
                         </h5>
                         <h3 class="post-title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h3>
                         <p>{{ blog.content|truncatewords:"1" }}</p>
@@ -45,7 +45,7 @@
                             <h5 class="taxonomy"><i>in</i> <a href="#">image</a>,
                                 <a href="#">{{ blog.blog_type }}</a></h5>
                             <div class="response-count">
-                                <img src="{% static 'images/comment-icon-gray.png' %}" alt="">{{ blog.response_count }}</div>
+                                <img src="{% static '/images/comment-icon-gray.png' %}" alt="">{{ blog.response_count }}</div>
                         </footer>
                     </div>
                 </div>
@@ -70,8 +70,22 @@
         <li><a href="#"><i class="fa fa-envelope"></i></a></li>
     </ul>
 </aside>
-                            {% include 'base_widget.html' %}
+{#                            {% include 'base_widget.html' %}#}
+ <!--Twitter Widget-->            {% for card in cards %}
 
+<aside class="col-sm-4 widget widget-twitter widget-with-posts post">
+
+    <div class="widget-twitter-inner">
+        <h5 class="widget-meta"><i class="fa fa-twitter"></i>{{ card.card_name }}</h5>
+        <div class="row tweet-texts">
+{#            <p>Check out new post on my blog</p>#}
+            <p><a href="{{ card.card_url }}">{{ card.card_title }}</a></p>
+        </div>
+        <div class="row timepast">1 day ago</div>
+    </div>
+
+</aside>
+    {% endfor %}
 {#                                <!--Twitter Widget-->#}
 {#        {% for card in cards %}#}
 {#<aside class="col-sm-4 widget widget-twitter widget-with-posts post">#}

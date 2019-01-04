@@ -1,6 +1,16 @@
 {% extends 'blog_base.html' %}
 {% load staticfiles %}
 {% block title %}
+
+{% ifnotequal  search  None %}
+       <section id="page-header">
+   	<div class="row current-cat">
+   		<div class="col-full">
+   			<h1>{{ search }}</h1>
+   		</div>
+   	</div>
+   </section>
+    {% endifnotequal %}
    <!-- masonry
    ================================================== -->
    <section id="bricks">
@@ -35,13 +45,14 @@
 				   	</div> <!-- end featured-post-slider -->        			
          		</div> <!-- end entry content -->         		
          	</div>
+                    {#   博客       #}
              {% for blog in all_blog.object_list %}
 {#             {% for blog in all_blog %}#}
          	<article class="brick entry format-standard animate-this">
 
                <div class="entry-thumb">
                   <a href="{% url 'blog:blog_detail' blog.id %}" class="thumb-link">
-	                  <img src="{% static 'images/thumbs/diagonal-building.jpg' %}" alt="building">
+	                  <img src="{% static '/images/thumbs/diagonal-building.jpg' %}" alt="building">
                   </a>
                </div>
 

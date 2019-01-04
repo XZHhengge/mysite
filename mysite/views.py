@@ -24,9 +24,10 @@ class About(View):
 
     def get(self, request):
         cards = PersonCard.objects.all()
-
+        user = UserProfile.objects.all()[0]
+        print(user)
         return render(request, 'about.html',
-                      {'titlename': 'About', 'cards': cards})
+                      {'titlename': 'About', 'cards': cards, 'user': user})
 
 
 # 联系页面

@@ -8,19 +8,16 @@
         <div class="row">
             <div class="col-md-8 page-contents">
                 <div class="row page-content">
-                    <img src="{% static 'images/author.jpg' %}" alt="" class="img-responsive">
+                    <img src="{% static '/images/author.jpg' %}" alt="" class="img-responsive">
                     
                     <div class="contents row">
-                        <h4>Mark Samder, lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h4>
+                        <h4>{{ user.text1 }}</h4>
                     
-                        <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>{{ user.text2 }}</p>
                         <br>
                         <div class="row">
                             <div class="col-sm-6">
-                                <p>It has survived not only five centuries, remaining essentially unchanged.
-                                    <a href="www.mywebsite.com">www.mywebsite.com</a>
-                                    it was popularised in the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p>{{ user.text3 }}</p>
                             </div>
                             <div class="col-sm-6">
                                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
@@ -30,20 +27,54 @@
                     
                 </div>
             </div>
-            <div class="col-md-4 sidebar">
-                           {% include 'base_widget.html' %}
+{#                                       {% include 'base_widget.html' %}#}
 
-                <!--Twitter Widget-->
-{#                <aside class="row m0 widget widget-twitter">#}
-{#                    <div class="widget-twitter-inner">#}
-{#                        <h5 class="widget-meta"><i class="fa fa-twitter"></i>CSDN<a href="https://blog.csdn.net/qq_40965177">my csdn blog</a></h5>#}
-{#                        <div class="row tweet-texts">#}
-{#                            <p>Check out new post on my blog <a href="http://twitter.com/#natureshot">#natureshot</a>#}
-{#                                <a href="http://bit.ly/blog">http://bit.ly/blog</a></p>#}
-{#                        </div>#}
-{#                        <div class="row timepast">1 day ago</div>#}
-{#                    </div>#}
-{#                </aside>#}
+            <div class="col-md-4 sidebar">
+
+{# <!--Twitter Widget-->            {% for card in cards %}#}
+{##}
+{#<aside class="col-sm-4 widget widget-twitter widget-with-posts post">#}
+{##}
+{#    <div class="widget-twitter-inner">#}
+{#        <h5 class="widget-meta"><i class="fa fa-twitter"></i>{{ card.card_name }}</h5>#}
+{#        <div class="row tweet-texts">#}
+{#            <p>Check out new post on my blog</p>#}
+{#            <p><a href="{{ card.card_url }}">{{ card.card_title }}</a></p>#}
+{#        </div>#}
+{#        <div class="row timepast">1 day ago</div>#}
+{#    </div>#}
+{##}
+{#</aside>#}
+{#    {% endfor %}#}
+                <aside class="row m0 widget widget-twitter">
+
+                    <div class="widget-twitter-inner">
+                         <h5 class="widget-meta"><i class="fa fa-twitter"></i>Twitter feed
+                         <a href="http://twitter.com/chivalricblog">@chivalricblog</a></h5>
+
+                        <div class="row tweet-texts">
+                             <p>Check out new post on my blog
+                             <a href="http://twitter.com/#natureshot">#natureshot</a>
+                             <a href="http://bit.ly/blog">http://bit.ly/blog</a></p>
+                                                    </div>
+
+                        <div class="row timepast">1 day ago</div>
+                                            </div>
+                                    </aside>                <aside class="row m0 widget widget-twitter">
+
+                    <div class="widget-twitter-inner">
+                         <h5 class="widget-meta"><i class="fa fa-twitter"></i>Twitter feed
+                         <a href="http://twitter.com/chivalricblog">@chivalricblog</a></h5>
+
+                        <div class="row tweet-texts">
+                             <p>Check out new post on my blog
+                             <a href="http://twitter.com/#natureshot">#natureshot</a>
+                             <a href="http://bit.ly/blog">http://bit.ly/blog</a></p>
+                                                    </div>
+
+                        <div class="row timepast">1 day ago</div>
+                                            </div>
+                                    </aside>
 
                 <aside class="row m0 widget widget-facebook">
                     <div class="widget-inner widget-facebook-inner">

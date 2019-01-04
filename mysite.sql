@@ -1,133 +1,261 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- 主机： localhost:3306
--- 生成日期： 2018-12-30 16:55:15
--- 服务器版本： 5.7.24-0ubuntu0.18.04.1
--- PHP 版本： 7.2.10-0ubuntu0.18.04.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: mysite
+-- ------------------------------------------------------
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- 数据库： `mysite`
+-- Table structure for table `auth_group`
 --
 
--- --------------------------------------------------------
-
---
--- 表的结构 `auth_group`
---
-
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_group` (
-  `id` int(11) NOT NULL,
-  `name` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 表的结构 `auth_group_permissions`
+-- Dumping data for table `auth_group`
 --
 
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_group_permissions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 表的结构 `auth_permission`
+-- Dumping data for table `auth_group_permissions`
 --
 
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_permission` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `codename` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转存表中的数据 `auth_permission`
+-- Dumping data for table `auth_permission`
 --
 
-INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
-(1, 'Can add log entry', 1, 'add_logentry'),
-(2, 'Can change log entry', 1, 'change_logentry'),
-(3, 'Can delete log entry', 1, 'delete_logentry'),
-(4, 'Can view log entry', 1, 'view_logentry'),
-(5, 'Can add permission', 2, 'add_permission'),
-(6, 'Can change permission', 2, 'change_permission'),
-(7, 'Can delete permission', 2, 'delete_permission'),
-(8, 'Can view permission', 2, 'view_permission'),
-(9, 'Can add group', 3, 'add_group'),
-(10, 'Can change group', 3, 'change_group'),
-(11, 'Can delete group', 3, 'delete_group'),
-(12, 'Can view group', 3, 'view_group'),
-(13, 'Can add user', 4, 'add_user'),
-(14, 'Can change user', 4, 'change_user'),
-(15, 'Can delete user', 4, 'delete_user'),
-(16, 'Can view user', 4, 'view_user'),
-(17, 'Can add content type', 5, 'add_contenttype'),
-(18, 'Can change content type', 5, 'change_contenttype'),
-(19, 'Can delete content type', 5, 'delete_contenttype'),
-(20, 'Can view content type', 5, 'view_contenttype'),
-(21, 'Can add session', 6, 'add_session'),
-(22, 'Can change session', 6, 'change_session'),
-(23, 'Can delete session', 6, 'delete_session'),
-(24, 'Can view session', 6, 'view_session'),
-(25, 'Can add Bookmark', 7, 'add_bookmark'),
-(26, 'Can change Bookmark', 7, 'change_bookmark'),
-(27, 'Can delete Bookmark', 7, 'delete_bookmark'),
-(28, 'Can view Bookmark', 7, 'view_bookmark'),
-(29, 'Can add User Setting', 8, 'add_usersettings'),
-(30, 'Can change User Setting', 8, 'change_usersettings'),
-(31, 'Can delete User Setting', 8, 'delete_usersettings'),
-(32, 'Can view User Setting', 8, 'view_usersettings'),
-(33, 'Can add User Widget', 9, 'add_userwidget'),
-(34, 'Can change User Widget', 9, 'change_userwidget'),
-(35, 'Can delete User Widget', 9, 'delete_userwidget'),
-(36, 'Can view User Widget', 9, 'view_userwidget'),
-(37, 'Can add log entry', 10, 'add_log'),
-(38, 'Can change log entry', 10, 'change_log'),
-(39, 'Can delete log entry', 10, 'delete_log'),
-(40, 'Can view log entry', 10, 'view_log'),
-(41, 'Can add home banner', 11, 'add_homebanner'),
-(42, 'Can change home banner', 11, 'change_homebanner'),
-(43, 'Can delete home banner', 11, 'delete_homebanner'),
-(44, 'Can view home banner', 11, 'view_homebanner'),
-(45, 'Can add 个人介绍', 12, 'add_myself'),
-(46, 'Can change 个人介绍', 12, 'change_myself'),
-(47, 'Can delete 个人介绍', 12, 'delete_myself'),
-(48, 'Can view 个人介绍', 12, 'view_myself'),
-(49, 'Can add 博客', 13, 'add_blog'),
-(50, 'Can change 博客', 13, 'change_blog'),
-(51, 'Can delete 博客', 13, 'delete_blog'),
-(52, 'Can view 博客', 13, 'view_blog'),
-(53, 'Can add 博客类型', 14, 'add_blogtype'),
-(54, 'Can change 博客类型', 14, 'change_blogtype'),
-(55, 'Can delete 博客类型', 14, 'delete_blogtype'),
-(56, 'Can view 博客类型', 14, 'view_blogtype');
-
--- --------------------------------------------------------
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add content type',4,'add_contenttype'),(14,'Can change content type',4,'change_contenttype'),(15,'Can delete content type',4,'delete_contenttype'),(16,'Can view content type',4,'view_contenttype'),(17,'Can add session',5,'add_session'),(18,'Can change session',5,'change_session'),(19,'Can delete session',5,'delete_session'),(20,'Can view session',5,'view_session'),(21,'Can add 个人信息',6,'add_userprofile'),(22,'Can change 个人信息',6,'change_userprofile'),(23,'Can delete 个人信息',6,'delete_userprofile'),(24,'Can view 个人信息',6,'view_userprofile'),(25,'Can add 博客',7,'add_blog'),(26,'Can change 博客',7,'change_blog'),(27,'Can delete 博客',7,'delete_blog'),(28,'Can view 博客',7,'view_blog'),(29,'Can add 博客类型',8,'add_blogtype'),(30,'Can change 博客类型',8,'change_blogtype'),(31,'Can delete 博客类型',8,'delete_blogtype'),(32,'Can view 博客类型',8,'view_blogtype'),(33,'Can add 博客轮播图',9,'add_bolgbanner'),(34,'Can change 博客轮播图',9,'change_bolgbanner'),(35,'Can delete 博客轮播图',9,'delete_bolgbanner'),(36,'Can view 博客轮播图',9,'view_bolgbanner'),(37,'Can add 首页轮播图',10,'add_homebanner'),(38,'Can change 首页轮播图',10,'change_homebanner'),(39,'Can delete 首页轮播图',10,'delete_homebanner'),(40,'Can view 首页轮播图',10,'view_homebanner'),(41,'Can add 博客类型',11,'add_personcard'),(42,'Can change 博客类型',11,'change_personcard'),(43,'Can delete 博客类型',11,'delete_personcard'),(44,'Can view 博客类型',11,'view_personcard'),(45,'Can add Bookmark',12,'add_bookmark'),(46,'Can change Bookmark',12,'change_bookmark'),(47,'Can delete Bookmark',12,'delete_bookmark'),(48,'Can view Bookmark',12,'view_bookmark'),(49,'Can add User Setting',13,'add_usersettings'),(50,'Can change User Setting',13,'change_usersettings'),(51,'Can delete User Setting',13,'delete_usersettings'),(52,'Can view User Setting',13,'view_usersettings'),(53,'Can add User Widget',14,'add_userwidget'),(54,'Can change User Widget',14,'change_userwidget'),(55,'Can delete User Widget',14,'delete_userwidget'),(56,'Can view User Widget',14,'view_userwidget'),(57,'Can add log entry',15,'add_log'),(58,'Can change log entry',15,'change_log'),(59,'Can delete log entry',15,'delete_log'),(60,'Can view log entry',15,'view_log');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- 表的结构 `auth_user`
+-- Table structure for table `blog_blog`
 --
 
-CREATE TABLE `auth_user` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `blog_blog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_blog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_time` datetime(6) NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_updated_time` datetime(6) NOT NULL,
+  `response_count` int(11) NOT NULL,
+  `click_number` int(11) NOT NULL,
+  `blog_url` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `blog_type_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `blog_blog_blog_type_id_de11bd65_fk_blog_blogtype_id` (`blog_type_id`),
+  KEY `blog_blog_user_id_0e1a17e5_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `blog_blog_blog_type_id_de11bd65_fk_blog_blogtype_id` FOREIGN KEY (`blog_type_id`) REFERENCES `blog_blogtype` (`id`),
+  CONSTRAINT `blog_blog_user_id_0e1a17e5_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_blog`
+--
+
+LOCK TABLES `blog_blog` WRITE;
+/*!40000 ALTER TABLE `blog_blog` DISABLE KEYS */;
+INSERT INTO `blog_blog` VALUES (1,'知乎','苹果公司下调 2019 第一财季业绩指导，预计收入约 840 亿美元，传递出哪些信息？','我太高兴了。跌的不够狠，还应该再跌。厨子大约是个不见棺材不落泪的人。希望下一代产品降价，手机，平板，mac全都有。手机这定价趋势我倒想知道明年能卖出去几台。ipad新的涨价，老款维持原价这是人干的事？新的边框还粗了，结构强度还变差了，笔也涨价了，书写延迟和一代居然没有区别？笔尖可以通用？您在逗我吗？新出的air是个什么玩意？一万块买个金色还是买个logo？要轻薄，没有，要性能，没有，要屏幕，还是没有。老air还是五代u吧？999刀？新老air全是电子垃圾，air在英语里是垃圾的意思吗？带bar pro卖的死贵，贵就算了，t2芯片是人用的？不带bar的不更新，还是吊打air，年中指不定还要一刀砍了怕air没人买。————————希望手机原配至少18w pd快充充电头和usb3.1线，出一个边框不粗于xs的lcd版本，或者把se弄成全面屏。大幅更新设计配置功能什么的，再说。ipad赶紧出个能用的特供ios，不求支持鼠标了，至少来个finder吧。现在的这系统怕不在逗我，也配叫pro？a12x就给这么个废物垃圾系统，暴殄天物。mac我也不指望啥了，就把12寸的给更新了吧，我想买个打打字。\r\n\r\n作者：你叫我改成什么好\r\n链接：https://www.zhihu.com/question/307815279/answer/565439538\r\n来源：知乎\r\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。','2019-01-04 11:05:00.000000','','2019-01-04 11:05:00.000000',0,0,NULL,2,1),(2,'知乎','苹果公司下调 2019 第一财季业绩指导，预计收入约 840 亿美元，传递出哪些信息？','作者：太平洋电脑网\r\n链接：https://www.zhihu.com/question/307815279/answer/565776358\r\n来源：知乎\r\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。\r\n\r\n这个问题在知乎上依然挺热的，反正不算流量惨淡，在几个月前，苹果刚好破万亿市值的时候写下了答案。（想不到现在股价大跌）我的答案的观点是这样的：相信很多人跟我一样，依然认为iPhone是最强的手机或者说是综合实力最强的手机。只不过，因为手机行业成熟，整个行业都遇到了瓶颈。在基础学科和研究没有巨大突破之前，整个行业可能会陷入缓慢的创新之中。同时，iPhone对比安卓阵容的领先程度已经大不如前，甚至在某些领域已经被某些安卓品牌超越了。与此同时，人类在这个时刻刚好碰上了可能是第四次工业革命：以人工智能，清洁能源，机器人技术，量子信息技术，虚拟现实以及生物技术为主的全新技术革命。苹果的副总裁表示，苹果正在向人工智能转变。那就意味着，苹果主要的竞争对手从手机等硬件厂商变成谷歌、百度等做人工智能、自动驾驶等厂商。在智能手机领域上，苹果依然有着最强的综合实力。虽然苹果嘴上说转型人工智能，但是目前来看，智能手机依然占据它大部分的收入。所以我认为苹果并没有走下坡路。毕竟它依然是智能手机的王者。但，无可否认的是，它跟安卓的距离越来越近了。库克在公开信中表明“iPhone以外的类别(服务、Mac、iPad、可穿戴设备/家庭/配件)同比增长近19%。”“包括服务、可穿戴产品和Mac营收创出历史新高。”库克知道，iPhone被追上是无可避免的，所以要多元化发展。可惜，这也暴漏了苹果过分依赖iPhone的问题。苹果是否会衰落？关键的一战就在于苹果是否能够成功转型。在外界看来，苹果的人工智能技术是落后于国际一线的公司（例如谷歌）。虽然库克口硬说是苹果低调......至于是否成功，就让时间给出答案。iPhone会卖乖吗?相信大家对今年iPhone的“标配祖传5W充电头”、阉割iPhoneXS系列的128G版本、历史新高售价等等颇有怨言。从这一季度的财报来看，苹果确实吃了点苦头，成为了2019年美股开始第一炸。但是，我并不认为苹果明年会把快充头、最受欢迎容量等等东西全都一次性放送给大家。因为折叠屏等技术还没有成熟，iPhoneXSS（原谅我猜不到下一代iPhone旗舰的名字）的外形变化可能不大。可能要继续使用两三年。那么，库克不可能一次性把全部需求释放。同时，iPhone还是综合实力最强的手机，库克大可以明年定价低一点，吸引大家来“真香”。库克在公开信表示“iPhone以外的类别(服务、Mac、iPad、可穿戴设备/家庭/配件)同比增长近19%。”可见，配件业务对于未来的苹果来说非常重要。这么快把快充头标配，充电头配件业务怎么做？还不如降价促销。换电池的价格降低确实对新iPhone造成一点的影响。但是在今年秋季之后，这些影响会明显降低，库克对iPhone的销售信心会增加一些。我们说到，苹果正在转型人工智能。苹果需要掠夺利润投入到人工智能的研究之中去，所以苹果会以利润为向导，从新调整战略。iPhoneXSS降价的同时一次性配备大家喜欢的东西（标配快充头、大电池、当年最受欢迎容量等等）可能不太现实。库克可能还会选择挤牙膏，只不过这一次挤牙膏力度大一点.....从我个人来看，我挺为喜欢苹果的。只不过，想苹果卖一个好好的价格，不要把我们当成韭菜，能割一把是一把。这是我的个人看法，欢迎大家在评论区发表您们的意见。','2019-01-04 11:15:00.000000','','2019-01-04 11:15:00.000000',0,0,NULL,2,1),(3,'豆瓣','蜘蛛侠：平行宇宙 Spider-Man: Into the Spider-Verse','迈尔斯（沙梅克·摩尔 配音）的父亲是一位一板一眼的警官，而他的母亲则是一名工作勤奋的护士。慈爱的父母对于孩子的成就非常自豪，也希望他能够融入新加入的这所优秀的学校，在这里取得成功。然而迈尔斯的生活因为一次意外变得更加复杂。他被一只放射性蜘蛛咬伤，并因此获得了毒液冲击、伪装隐藏、蜘蛛爬行、超凡听力、蜘蛛感应等一系列超能力。与此同时，这座城市里最臭名昭着的犯罪头目金并（列维·施瑞博尔 配音）已经建立起一台高度隐秘的超级对撞机，这台对撞机开启了通往其他宇宙的时空通道，来自其他宇宙、不同版本的蜘蛛侠（包括中年彼得·帕克、女蜘蛛侠格温、暗影蜘蛛侠、蜘猪侠和潘妮·帕克）也来到了迈尔斯所在的世界。在这些新老角色的帮助下，迈尔斯慢慢学习、逐渐接受挑战，也学会了作为一名超级英雄所要承担的责任。他最终意识到，任何人都可以戴上超级英雄的面具，为正义而战……','2019-01-04 11:16:00.000000','homeblogimage/2019/01/蜘蛛侠.webp','2019-01-04 11:16:00.000000',0,0,NULL,4,1),(4,'知乎','万字长文深度解析Python装饰器','Python 中的装饰器是你进入 Python 大门的一道坎，不管你跨不跨过去它都在那里。\r\n\r\n为什么需要装饰器\r\n我们假设你的程序实现了 say_hello () 和 say_goodbye () 两个函数。\r\n\r\ndef say_hello():\r\n   print \"hello!\"\r\n\r\ndef say_goodbye():\r\n   print \"hello!\"  # bug here\r\n\r\nif __name__ == \'__main__\':\r\n   say_hello()\r\n   say_goodbye()\r\n但是在实际调用中，我们发现程序出错了，上面的代码打印了两个 hello 。经过调试你发现是 say_goodbye () 出错了。老板要求调用每个方法前都要记录进入函数的时间和名称，比如这样：\r\n\r\n[DEBUG] 2016 - 10 - 27 11:11:11 - Enter say_hello()\r\nHello!\r\n\r\n[DEBUG] 2016 - 10 - 27 11:11:11 - Enter say_goodbye()\r\nGoodbye!\r\n好，小 A 是个毕业生，他是这样实现的。\r\n\r\ndef say_hello():\r\n   print \"[DEBUG]: enter say_hello()\"\r\n   print \"hello!\"\r\n\r\ndef say_goodbye():\r\n   print \"[DEBUG]: enter say_goodbye()\"\r\n   print \"hello!\"\r\n\r\nif __name__ == \'__main__\':\r\n   say_hello()\r\n   say_goodbye()\r\n很 low 吧？ 嗯是的。小 B 工作有一段时间了，他告诉小 A 应该这样写。\r\n\r\ndef debug():\r\n   import inspect\r\n   caller_name = inspect.stack()[1][3]    \r\n   print \"[DEBUG]: enter {}()\".format(caller_name)\r\n\r\ndef say_hello():\r\n   debug()    \r\n   print \"hello!\"\r\n\r\ndef say_goodbye():\r\n   debug()    \r\n   print \"goodbye!\"\r\n\r\nif __name__ == \'__main__\':\r\n   say_hello()\r\n   say_goodbye()\r\n是不是好一点？那当然，但是每个业务函数里都要调用一下 debug () 函数，是不是很难受？万一老板说 say 相关的函数不用 debug ， do 相关的才需要呢？\r\n\r\n那么装饰器这时候应该登场了。\r\n\r\n装饰器本质上是一个 Python 函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。\r\n概括的讲，装饰器的作用就是为已经存在的函数或对象添加额外的功能。\r\n\r\n怎么写一个装饰器\r\n在早些时候 \\ ( Python Version < 2.4，2004年以前 \\ )，为一个函数添加额外功能的写法是这样的。\r\n\r\ndef debug(func):\r\n   def wrapper():\r\n       print \"[DEBUG]: enter {}()\".format(func.__name__)        \r\n       return func()    \r\n   return wrapper\r\n\r\ndef say_hello():\r\n   print \"hello!\"\r\n   \r\nsay_hello = debug(say_hello)  # 添加功能并保持原函数名不变\r\n上面的 debug 函数其实已经是一个装饰器了，它对原函数做了包装并返回了另外一个函数，额外添加了一些功能。因为这样写实在不太优雅， [email\r\nprotected]，下面代码等同于早期的写法。\r\n\r\ndef debug(func):\r\n   def wrapper():\r\n       print \"[DEBUG]: enter {}()\".format(func.__name__)        \r\n       return func()    \r\n   return wrapper\r\n\r\n@debug\r\ndef say_hello():\r\n   print \"hello!\"\r\n这是最简单的装饰器，但是有一个问题，如果被装饰的函数需要传入参数，那么这个装饰器就坏了。因为返回的函数并不能接受参数，你可以指定装饰器函数 wrapper 接受和原函数一样的参数，比如：\r\n\r\ndef debug(func):\r\n   def wrapper(something):  # 指定一毛一样的参数\r\n       print \"[DEBUG]: enter {}()\".format(func.__name__)        \r\n       return func(something)    \r\n   return wrapper  # 返回包装过函数\r\n\r\n@debug\r\ndef say(something):\r\n   print \"hello {}!\".format(something)\r\n这样你就解决了一个问题，但又多了 N 个问题。因为函数有千千万，你只管你自己的函数，别人的函数参数是什么样子，鬼知道？还好 Python 提供了可变参数 * args 和关键字参数 ** kwargs ，有了这两个参数，装饰器就可以用于任意目标函数了。','2019-01-04 11:22:00.000000','','2019-01-04 11:22:00.000000',0,0,NULL,1,1);
+/*!40000 ALTER TABLE `blog_blog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_blogtype`
+--
+
+DROP TABLE IF EXISTS `blog_blogtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_blogtype` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `blog_blogtype_user_id_735fe7dc_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `blog_blogtype_user_id_735fe7dc_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_blogtype`
+--
+
+LOCK TABLES `blog_blogtype` WRITE;
+/*!40000 ALTER TABLE `blog_blogtype` DISABLE KEYS */;
+INSERT INTO `blog_blogtype` VALUES (1,'Python','Blog_type/2019/01/python.jpg',1),(2,'转载','Blog_type/2019/01/转载.jpg',1),(3,'随笔','Blog_type/2019/01/随笔.jpg',1),(4,'影视','Blog_type/2019/01/教父.jpg',1),(5,'独白','Blog_type/2019/01/独白.jpg',1);
+/*!40000 ALTER TABLE `blog_blogtype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_bolgbanner`
+--
+
+DROP TABLE IF EXISTS `blog_bolgbanner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_bolgbanner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `index` int(11) NOT NULL,
+  `add_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_bolgbanner`
+--
+
+LOCK TABLES `blog_bolgbanner` WRITE;
+/*!40000 ALTER TABLE `blog_bolgbanner` DISABLE KEYS */;
+INSERT INTO `blog_bolgbanner` VALUES (1,'','2012','blog_banner/2019/01/674067.jpg',100,'2019-01-02 20:22:00.000000'),(2,'','Batman v Superman: Dawn of Justice','blog_banner/2019/01/682810.jpg',101,'2019-01-02 20:23:00.000000'),(3,'','The Bourne Identity','blog_banner/2019/01/706925.jpg',102,'2019-01-02 20:25:00.000000');
+/*!40000 ALTER TABLE `blog_bolgbanner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_homebanner`
+--
+
+DROP TABLE IF EXISTS `blog_homebanner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_homebanner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `index` int(11) NOT NULL,
+  `add_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_homebanner`
+--
+
+LOCK TABLES `blog_homebanner` WRITE;
+/*!40000 ALTER TABLE `blog_homebanner` DISABLE KEYS */;
+INSERT INTO `blog_homebanner` VALUES (1,'陈奕迅','有人问我 我就会讲 但是无人来','homebanner/2018/12/chen.jpg',NULL,100,'2018-12-23 20:04:00.000000'),(2,'Jay Chou','为你弹奏肖邦的夜曲  纪念我死去的爱情','homebanner/2018/12/jaychou.jpg',NULL,101,'2018-12-24 22:04:00.000000'),(3,'Jay Chou','荣耀的背后刻著一道孤独','homebanner/2018/12/taile.jpg',NULL,102,'2018-12-24 22:04:00.000000');
+/*!40000 ALTER TABLE `blog_homebanner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_personcard`
+--
+
+DROP TABLE IF EXISTS `blog_personcard`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_personcard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `card_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_url` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `blog_personcard_user_id_8a7a5693_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `blog_personcard_user_id_8a7a5693_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_personcard`
+--
+
+LOCK TABLES `blog_personcard` WRITE;
+/*!40000 ALTER TABLE `blog_personcard` DISABLE KEYS */;
+INSERT INTO `blog_personcard` VALUES (1,'知乎','我的知乎首页','https://www.zhihu.com/people/lonelyguang-hui/activities',1),(2,'CSDN','csdn技术博客','https://blog.csdn.net/qq_40965177',1);
+/*!40000 ALTER TABLE `blog_personcard` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_userprofile`
+--
+
+DROP TABLE IF EXISTS `blog_userprofile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_userprofile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
@@ -137,283 +265,234 @@ CREATE TABLE `auth_user` (
   `email` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
-  `date_joined` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 转存表中的数据 `auth_user`
---
-
-INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$120000$R91slgQv22YJ$GrPOmqpNOrD9FdhGuXodm/FWRAWRsN+Sa6lSqpigyJ8=', '2018-12-24 19:34:28.500792', 1, 'root', '', '', '', 1, 1, '2018-12-23 18:36:19.125542');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `auth_user_groups`
---
-
-CREATE TABLE `auth_user_groups` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `auth_user_user_permissions`
---
-
-CREATE TABLE `auth_user_user_permissions` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `blog_blog`
---
-
-CREATE TABLE `blog_blog` (
-  `created_time` datetime(6) NOT NULL,
-  `id` int(11) NOT NULL,
-  `title` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `author` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_updated_time` datetime(6) NOT NULL,
-  `response_count` int(11) NOT NULL,
-  `blog_url` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `blog_type_id` int(11) NOT NULL,
-  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `click_number` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 转存表中的数据 `blog_blog`
---
-
-INSERT INTO `blog_blog` (`created_time`, `id`, `title`, `content`, `author`, `last_updated_time`, `response_count`, `blog_url`, `blog_type_id`, `image`, `click_number`) VALUES
-('2018-12-23 22:37:00.000000', 1, 'Nature, in the broadest sense, is the natural, physical, or material world or universe.', 'In the broadest sense, is the natural, physical, or material world or universe...', '博主', '2018-12-24 13:40:07.488328', 5, NULL, 4, 'homeblogimage/2018/12/4.jpg', 0),
-('2018-12-23 22:41:00.000000', 2, '如何评价 22 岁 MIT 博士生曹原获评 Nature 2018 年度十大人物之一，并居榜单首位？', '曹原的青少年时期异于常人。18岁时，他不仅已经高中毕业，还从中国科学技术大学拿到了本科学位，并前往美国开始攻读博士。此后，曹原再接再厉，先后发表了两篇关于原子厚度碳片层奇异行为的论文，开启了物理学的一个全新领域。曹原承认自己的情况有别于常人，但是说自己并不特殊。毕竟他还是用四年时间读完的大学本科：“我只是跳过了中学里一些无趣的部分。”2014年，曹原加入了Pablo Jarillo-Herrero在麻省理工学院的团队，该团队当时已经开始进行将碳片层堆叠和旋转至不同角度的尝试。曹原的主要工作是考察在堆叠的双层石墨烯中，如果将其中一层相对另一层旋转极小的角度后会发生什么。根据一种理论预测，这种扭曲会极大地改变石墨烯的行为，但许多物理学家对此持怀疑态度。曹原决心创造出这种以微妙角度扭曲的双层石墨烯，并发现了一些奇异的现象。对石墨烯施加微弱的电场并冷却至绝对零度以上1.7度时，会让能导电的石墨烯变成绝缘体（Y. Cao et al. Nature 556, 80–84; 2018）。这一发现本身不可谓不令人惊讶。\r\n\r\n\r\nhttps://www.zhihu.com/question/306192676/answer/556812600', '知乎', '2018-12-24 13:39:49.815215', 5, 'https://www.zhihu.com/question/306192676/answer/55', 5, 'homeblogimage/2018/12/2.jpg', 0),
-('2018-12-23 22:41:00.000000', 3, '《春江花月夜》为何被誉为“孤篇压全唐”？', '张若虚的《春江花月夜》之所以被人誉为“孤篇压全唐”，跟下面两位学者的评论有关。清末学者王闿运评其曰：“张若虚《春江花月夜》用《西洲》格调，孤篇横绝，竟为大家。李贺、商隐，挹其鲜润；宋词、元诗，尽其支流。宫体之巨澜也。”后人经常引用的“孤篇横绝,竟为大家”即出自此处。这也是第一次有人承认张若虚在古典诗歌中的地位，而且“大家”这种称呼，将张的地位拔到极高的程度。即：他的诗出乎于初唐四杰，又超过了四杰的成就。而近代的闻一多在《宫体诗的自赎》一书中称它为“诗中的诗，顶峰上的顶峰”。闻一多先生的点评后面还有一句： “至于那一百年间梁、陈、隋、唐四代宫廷所遗下的那份最黑暗的罪孽，有了《春江花月夜》这样一首宫体诗，不也就洗净了吗？向前替宫体诗赎清了百年的罪，因此，向后也就和另一个顶峰陈子昂分工合作，清除了盛唐的路，——张若虚的功绩是无从估计的。”其实，王闿运的“孤篇横绝”，不是指横绝整个唐诗，而是相对于齐梁以来流行的宫体诗。而闻一多的“诗中的诗，顶峰上的顶峰”，也是指相对于齐梁隋唐以来的宫体诗。所以，“孤篇压倒全唐”这种说法，其实是对“孤篇横绝,竟为大家”及“诗中的诗，顶峰上的顶峰”的误解和断章取义。当然，事情并非这么简单。程千帆老师认为王闿运和闻一多把《春江花月夜》划入“宫体诗”的范畴，是一种误解。王闿运称张的《春江花月夜》为“宫体诗巨澜”，是没有依据的。其徒弟陈兆奎对这句话的解读为：“奎案：昌谷五言不如七言，义山七言不如五言，一以涩练为奇，一以纤绮为巧，均思自树一帜，然皆原宫体。宫体倡于《艳歌》、《陇西》诸篇。子建、繁钦，大其波澜，梁代父子，始成格律。相沿弥永，久而愈新。以其寄意闺闼，感发易明，故独优于诸格。后之学者，已莫揣其本矣。”如果真是这种认知，那么显然就把爱情诗的源流当作宫体诗的源流，既没有文献根据，也不符合历史事实。', '知乎', '2018-12-24 13:39:38.945354', 50, 'https://www.zhihu.com/question/301477404', 5, 'homeblogimage/2018/12/1.jpg', 0),
-('2018-12-27 15:46:00.000000', 4, '孙悟空为什么不找如来报仇？', '作者：斯巴达克斯\r\n链接：https://www.zhihu.com/question/43344428/answer/492527800\r\n来源：知乎\r\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。\r\n\r\n我叫如来，五百年前我曾压了一只猴子。那只猴子本领并不平庸，可是在我们这些人看来也谈不上出色，全身上下唯一能让我刮目相看的就是一身傲气，毕竟我们活了这么久早已经习惯了和和气气的生活。“皇帝轮流坐，今年到我家，我要诛灭你们这些假仁假义的神佛。”这是刚见面他就对我说的话，我一愣，与我还是王子的时候何其相似，可是不知他能走到哪一步。“你诛灭了我们，然后呢，和你的六个兄长一起建立妖国吗？”我笑着问。他愣住了，然后盘算了一会儿，“正是如此。”“那你们最后也会变成新的神佛，等着别人来推翻。”“我有七十二变，我有筋斗云，我有金箍棒，我……”他细数了自己的本领，我听着很耳熟，那些都是我玩过儿的，可是说到最后他自己也说不下去，显然，他成了玉帝后会有别的猴子，豹子，或者狮子老虎来推翻他，哪怕是跳蚤都有可能。“我知道了，我可以公平地对待每一个人，这样他们就不会推翻我。”那只猴子挠了挠头，他觉得自己是一只很好的猴子，必然不会和现在的神仙一样，对他这样本领高强的人熟视无睹。“玉帝对你不公平吗？”我疑惑，他曾是个很厚到的人。“他不让我参加蟠桃会。”猴子把金箍棒砸在了地上。“哦，原来是这样，太白金星在天庭做了五百年的官后玉帝准许他可以每年都来，赤脚大仙七百年，太上老君倒是老早就可以了，可是他会炼丹，贡献比较大。你这样的一般两百年就可以参加蟠桃会。”“我等不了，我本领高强，可澄清万里玉宇。”猴子听到两百年立刻开始抓狂，但其实那是个很小的数字，对我们这样的人来说。“可是他不需要你如此啊，又没有妖精让你去平定，立不了功就只能多等些时候，不然对那些同样吃不起蟠桃的人不公平。”“他可以把蟠桃都拿出来，小家子气。”“我记得你看过蟠桃园，里面有多少棵树？”我问。“九千棵。”猴子听土地唠叨过，这么多树，让花果山吃几年都可以。“可是漫天神佛仙人近百万，所以他对你很公平。”我叹了口气，其实什么都不够，蟠桃不够，仙丹不够，西天那里更穷，趁手的宝物都分不了几个人。', '知乎', '2018-12-27 15:44:00.000000', 5, NULL, 5, '', 0),
-('2018-12-29 13:58:00.000000', 5, '2qeq2q4eq', 'q24qrafdasdawd', '博主', '2018-12-29 13:58:00.000000', 5, NULL, 1, '', 0),
-('2018-12-29 13:58:00.000000', 6, 'awafsegterw12', '1241tfsd', '博主', '2018-12-29 13:58:00.000000', 5, NULL, 2, '', 0),
-('2018-12-29 13:58:00.000000', 7, '2q3trfwqrw2', 'q2rqt34t3', '博主', '2018-12-29 13:58:00.000000', 5, NULL, 3, '', 0),
-('2018-12-29 13:58:00.000000', 8, 'wgtef3qwrqw', 'hjyjgytjgyjfhtf', '博主', '2018-12-29 13:58:00.000000', 5, NULL, 2, '', 0),
-('2018-12-29 13:59:00.000000', 9, 'gfthfgewsafwq', 'q2werq3r3werAQWD', '博主', '2018-12-29 13:59:00.000000', 5, NULL, 3, '', 0),
-('2018-12-29 15:26:00.000000', 10, '2018 年 12 月 27 日中国宣布北斗三号基本系统完成建设，将提供全球服务，这具有怎样的意义?', '作者：王佳伟\r\n链接：https://www.zhihu.com/question/307171591/answer/562041695\r\n来源：知乎\r\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。\r\n\r\n前几天论文刚写完，数据是在27号前测的，不然实验结果会更好。回到正题，在做实验时就发现，用于RTK(实时载波相位)差分定位(用于厘米级定位的一种技术)时，北斗的可观测卫星数量就多于GPS。使用BDS(北斗)生成浮动定位解和固定定位解的速度明显快于GPS，GPS很多时间甚至都不能生成固定解而只能单点定位。根据我的实验结果，BDS的水平方向精确度可以达到0.03m，准确度0.05m，优于GPS，在中国范围内使用BDS绝对是定位精度最好的选择。差分服务目前千寻位置提供的比较好，但就是费用相对普通用户有点高。不然就是像我们这样自己搭建基准站来做实验。另外也需要接受设备支持解算差分数据，这类设备一般体积庞大，所以也就是为什么咱们手机不能用厘米定位了。不过随着国内一众板卡设计厂商华测、南方、司南导航、中海达等，相信以后板卡可以做得更小。不过厘米级服务是否向民间开放就不知道了，我们现在是用于道路施工中。从11月19号发射两颗MEO后，其实北斗三号基本系统就已经完成，同等条件下，BDS的可观测卫星都是多于GPS的，虽然目前我们为了提高精度，用BDS/GPS多，到最后只用BDS也是完全可以的。这次的官宣，北斗开始全球范围提供服务，彰显了我国的硬实力，要为祖国疯狂打call啊！', '知乎', '2018-12-29 15:26:00.000000', 5, NULL, 5, '', 0),
-('2018-12-29 15:28:00.000000', 11, '2018-2019 跨年，你会怎么过呢？', '在18年最后几秒吃颗糖，这样19年刚开始就尝到了甜头哈哈哈~\r\n\r\n（也只能这样占占生活的便宜了）', '博主', '2018-12-29 15:28:00.000000', 5, NULL, 5, '', 0);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `blog_blogtype`
---
-
-CREATE TABLE `blog_blogtype` (
-  `id` int(11) NOT NULL,
-  `type_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 转存表中的数据 `blog_blogtype`
---
-
-INSERT INTO `blog_blogtype` (`id`, `type_name`) VALUES
-(1, 'Python'),
-(2, '感悟'),
-(3, '随笔'),
-(4, 'Mark Sanders'),
-(5, '转载');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `blog_homebanner`
---
-
-CREATE TABLE `blog_homebanner` (
-  `id` int(11) NOT NULL,
-  `author` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `index` int(11) NOT NULL,
-  `add_time` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 转存表中的数据 `blog_homebanner`
---
-
-INSERT INTO `blog_homebanner` (`id`, `author`, `title`, `image`, `url`, `index`, `add_time`) VALUES
-(1, '陈奕迅', '有人问我 我就会讲 但是无人来', 'homebanner/2018/12/Eason_Chan_UVvj2fC.jpg', NULL, 100, '2018-12-23 20:04:00.000000'),
-(2, 'Jay Chou', '为你弹奏肖邦的夜曲  纪念我死去的爱情', 'homebanner/2018/12/十月的肖邦_CC1zliG.jpeg', NULL, 101, '2018-12-24 22:04:00.000000'),
-(3, 'Jay Chou', '荣耀的背后刻著一道孤独', 'homebanner/2018/12/4.叶惠美_75bIdIJ.jpg', NULL, 102, '2018-12-24 22:04:00.000000');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `blog_myself`
---
-
-CREATE TABLE `blog_myself` (
-  `id` int(11) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
   `text1` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `text2` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `text3` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `csdn_url` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_userprofile`
+--
+
+LOCK TABLES `blog_userprofile` WRITE;
+/*!40000 ALTER TABLE `blog_userprofile` DISABLE KEYS */;
+INSERT INTO `blog_userprofile` VALUES (1,'pbkdf2_sha256$120000$Eu0R49Ct89kc$UsSaJfOKUU03KjtuFFK3FtGHgaQMri6MNOjcZvKU/k4=','2019-01-02 20:54:00.000000',1,'root','zbc','awda','1075605131@qq.com',1,1,'2019-01-02 18:54:00.000000','善自嘲而不嘲人','一个文笔不好的程序员的读写博客。学习之余，我运用了自己的专业知识做了这个博客。前端页面是网上找的，后端用Django框架。时间总会过的，所以我需要找个地方写点东西。这里就是我写字的地方。','个人兴趣爱好广泛，书籍，电音，电影，动漫，NBA都有接触，不喜欢社交活动。个人在这些艺术作品中能够找到令人思考的东西，远比一群人在高谈阔论的要多。但我又不否认社交活动的必要性。不知道什么时候开始，自己就不喜欢人多的地方，而是喜欢自己一个人静静地思考，阅读，或者是欣赏一部好的电影。天下之大，终有伯乐。','myself/2019/01/author.png');
+/*!40000 ALTER TABLE `blog_userprofile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_userprofile_groups`
+--
+
+DROP TABLE IF EXISTS `blog_userprofile_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_userprofile_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userprofile_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `blog_userprofile_groups_userprofile_id_group_id_06da97e7_uniq` (`userprofile_id`,`group_id`),
+  KEY `blog_userprofile_groups_group_id_4a6ba027_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `blog_userprofile_gro_userprofile_id_9f24437d_fk_blog_user` FOREIGN KEY (`userprofile_id`) REFERENCES `blog_userprofile` (`id`),
+  CONSTRAINT `blog_userprofile_groups_group_id_4a6ba027_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 表的结构 `django_admin_log`
+-- Dumping data for table `blog_userprofile_groups`
 --
 
+LOCK TABLES `blog_userprofile_groups` WRITE;
+/*!40000 ALTER TABLE `blog_userprofile_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blog_userprofile_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_userprofile_user_permissions`
+--
+
+DROP TABLE IF EXISTS `blog_userprofile_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_userprofile_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userprofile_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `blog_userprofile_user_pe_userprofile_id_permissio_5e2f216e_uniq` (`userprofile_id`,`permission_id`),
+  KEY `blog_userprofile_use_permission_id_a2a440ee_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `blog_userprofile_use_permission_id_a2a440ee_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `blog_userprofile_use_userprofile_id_72c0b386_fk_blog_user` FOREIGN KEY (`userprofile_id`) REFERENCES `blog_userprofile` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_userprofile_user_permissions`
+--
+
+LOCK TABLES `blog_userprofile_user_permissions` WRITE;
+/*!40000 ALTER TABLE `blog_userprofile_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blog_userprofile_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_admin_log` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
   `object_id` longtext COLLATE utf8mb4_unicode_ci,
   `object_repr` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `action_flag` smallint(5) UNSIGNED NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
   `change_message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 表的结构 `django_content_type`
+-- Dumping data for table `django_admin_log`
 --
 
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_content_type` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `model` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转存表中的数据 `django_content_type`
+-- Dumping data for table `django_content_type`
 --
 
-INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
-(1, 'admin', 'logentry'),
-(3, 'auth', 'group'),
-(2, 'auth', 'permission'),
-(4, 'auth', 'user'),
-(13, 'blog', 'blog'),
-(14, 'blog', 'blogtype'),
-(11, 'blog', 'homebanner'),
-(12, 'blog', 'myself'),
-(5, 'contenttypes', 'contenttype'),
-(6, 'sessions', 'session'),
-(7, 'xadmin', 'bookmark'),
-(10, 'xadmin', 'log'),
-(8, 'xadmin', 'usersettings'),
-(9, 'xadmin', 'userwidget');
-
--- --------------------------------------------------------
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(7,'blog','blog'),(8,'blog','blogtype'),(9,'blog','bolgbanner'),(10,'blog','homebanner'),(11,'blog','personcard'),(6,'blog','userprofile'),(4,'contenttypes','contenttype'),(5,'sessions','session'),(12,'xadmin','bookmark'),(15,'xadmin','log'),(13,'xadmin','usersettings'),(14,'xadmin','userwidget');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- 表的结构 `django_migrations`
+-- Table structure for table `django_migrations`
 --
 
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_migrations` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `app` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `applied` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转存表中的数据 `django_migrations`
+-- Dumping data for table `django_migrations`
 --
 
-INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2018-12-23 18:30:17.151746'),
-(2, 'auth', '0001_initial', '2018-12-23 18:30:37.245717'),
-(3, 'admin', '0001_initial', '2018-12-23 18:30:40.738265'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2018-12-23 18:30:40.818682'),
-(5, 'admin', '0003_logentry_add_action_flag_choices', '2018-12-23 18:30:40.904340'),
-(6, 'contenttypes', '0002_remove_content_type_name', '2018-12-23 18:30:43.526420'),
-(7, 'auth', '0002_alter_permission_name_max_length', '2018-12-23 18:30:45.362738'),
-(8, 'auth', '0003_alter_user_email_max_length', '2018-12-23 18:30:45.731717'),
-(9, 'auth', '0004_alter_user_username_opts', '2018-12-23 18:30:45.833900'),
-(10, 'auth', '0005_alter_user_last_login_null', '2018-12-23 18:30:47.493687'),
-(11, 'auth', '0006_require_contenttypes_0002', '2018-12-23 18:30:47.563025'),
-(12, 'auth', '0007_alter_validators_add_error_messages', '2018-12-23 18:30:47.671614'),
-(13, 'auth', '0008_alter_user_username_max_length', '2018-12-23 18:30:50.315198'),
-(14, 'auth', '0009_alter_user_last_name_max_length', '2018-12-23 18:30:52.581214'),
-(15, 'sessions', '0001_initial', '2018-12-23 18:30:54.598719'),
-(16, 'xadmin', '0001_initial', '2018-12-23 18:31:15.091758'),
-(17, 'xadmin', '0002_log', '2018-12-23 18:31:21.791630'),
-(18, 'xadmin', '0003_auto_20160715_0100', '2018-12-23 18:31:24.427024'),
-(19, 'auth', '0010_auto_20181223_1916', '2018-12-23 19:23:02.426845'),
-(20, 'blog', '0001_initial', '2018-12-23 19:23:02.831257'),
-(21, 'blog', '0002_auto_20181223_1927', '2018-12-23 19:27:19.935610'),
-(22, 'blog', '0003_auto_20181223_1947', '2018-12-23 19:47:50.934392'),
-(23, 'blog', '0004_auto_20181223_2032', '2018-12-23 20:32:30.253476'),
-(24, 'blog', '0005_auto_20181223_2227', '2018-12-23 22:27:32.623177'),
-(25, 'blog', '0006_auto_20181223_2229', '2018-12-23 22:29:46.240070'),
-(26, 'blog', '0007_auto_20181223_2236', '2018-12-23 22:36:30.136663'),
-(27, 'blog', '0008_blog_image', '2018-12-24 13:37:34.992827'),
-(28, 'blog', '0009_auto_20181224_2142', '2018-12-24 21:42:18.104063'),
-(29, 'blog', '0010_auto_20181227_1539', '2018-12-27 15:39:50.119155'),
-(30, 'blog', '0011_auto_20181229_1655', '2018-12-29 16:55:21.106470');
-
--- --------------------------------------------------------
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2019-01-02 14:24:47.682122'),(2,'contenttypes','0002_remove_content_type_name','2019-01-02 14:24:48.509341'),(3,'auth','0001_initial','2019-01-02 14:24:52.509210'),(4,'auth','0002_alter_permission_name_max_length','2019-01-02 14:24:53.030847'),(5,'auth','0003_alter_user_email_max_length','2019-01-02 14:24:53.072745'),(6,'auth','0004_alter_user_username_opts','2019-01-02 14:24:53.111521'),(7,'auth','0005_alter_user_last_login_null','2019-01-02 14:24:53.146898'),(8,'auth','0006_require_contenttypes_0002','2019-01-02 14:24:53.174036'),(9,'auth','0007_alter_validators_add_error_messages','2019-01-02 14:24:53.214259'),(10,'auth','0008_alter_user_username_max_length','2019-01-02 14:24:53.248289'),(11,'auth','0009_alter_user_last_name_max_length','2019-01-02 14:24:53.287340'),(12,'auth','0010_auto_20181223_1916','2019-01-02 14:24:53.317165'),(13,'blog','0001_initial','2019-01-02 14:25:01.161054'),(14,'admin','0001_initial','2019-01-02 14:25:02.566954'),(15,'admin','0002_logentry_remove_auto_add','2019-01-02 14:25:02.612406'),(16,'admin','0003_logentry_add_action_flag_choices','2019-01-02 14:25:02.669020'),(17,'sessions','0001_initial','2019-01-02 14:25:03.187368'),(18,'xadmin','0001_initial','2019-01-02 14:25:06.195101'),(19,'xadmin','0002_log','2019-01-02 14:25:07.500987'),(20,'xadmin','0003_auto_20160715_0100','2019-01-02 14:25:08.082660'),(21,'blog','0002_auto_20190102_1859','2019-01-02 18:59:42.051226'),(22,'blog','0003_auto_20190102_2006','2019-01-02 20:06:37.133216'),(23,'blog','0004_auto_20190102_2028','2019-01-02 20:31:37.167988'),(24,'blog','0005_auto_20190102_2031','2019-01-02 20:31:37.222708'),(25,'blog','0006_auto_20190102_2112','2019-01-02 21:12:31.890095'),(26,'blog','0007_auto_20190104_1112','2019-01-04 11:12:59.163329');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- 表的结构 `django_session`
+-- Table structure for table `django_session`
 --
 
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_session` (
   `session_key` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `session_data` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expire_date` datetime(6) NOT NULL
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转存表中的数据 `django_session`
+-- Dumping data for table `django_session`
 --
 
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('eil3pik1ni85ocisjjgnzuclgwfu0ipz', 'MzRiNGQxYzY1YjQyNzhkN2U2YjJmY2I3NTVmZTUyN2MwZDQ0YmY5Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5MDE1NDgzMjUxZjg5NjcwOGRiNWYyOWJhMDMxM2E1MDhiN2YzOGI4IiwiTElTVF9RVUVSWSI6W1siYmxvZyIsImhvbWViYW5uZXIiXSwiIl19', '2019-01-07 22:08:21.509758'),
-('x3xskr1pv9e4hdxelgcl77kv3vsnrw8g', 'NDE5OWVjNDg3YmEzZDk5ZTQyMTE3MDVhZDE0YmU2ZjFmN2YwZjYwNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5MDE1NDgzMjUxZjg5NjcwOGRiNWYyOWJhMDMxM2E1MDhiN2YzOGI4IiwiTElTVF9RVUVSWSI6W1siYmxvZyIsImJsb2ciXSwiIl19', '2019-01-12 13:59:15.154331'),
-('x71oyb8wpvnh4g8zeqoe41j6i3lgo06m', 'MmUwMDRkMzU1NTMxNjE1ZDU0Zjg4OWUwNzIxNzIwMTBlZTRmMDg3ODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5MDE1NDgzMjUxZjg5NjcwOGRiNWYyOWJhMDMxM2E1MDhiN2YzOGI4IiwiTElTVF9RVUVSWSI6W1siYmxvZyIsImJsb2d0eXBlIl0sIiJdfQ==', '2019-01-13 15:13:11.342420'),
-('yns2x5mvg94qlnc43328gtf9hywuicx5', 'NDE5OWVjNDg3YmEzZDk5ZTQyMTE3MDVhZDE0YmU2ZjFmN2YwZjYwNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5MDE1NDgzMjUxZjg5NjcwOGRiNWYyOWJhMDMxM2E1MDhiN2YzOGI4IiwiTElTVF9RVUVSWSI6W1siYmxvZyIsImJsb2ciXSwiIl19', '2019-01-07 13:49:32.210191');
-
--- --------------------------------------------------------
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('e7trckxiukqnyp5uaguf3xhcg9jrd7sw','MjRkZWQ0MmYzMGM5YTk0Y2VhNTIxM2Y4ODIzOTk4NWQ3NTI2MzU5Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNzc4ZjJjYmZmNmU3YTI5MDMyYjUwYzg5NzFjZDY2ZDQzYzIzY2Y2IiwiTElTVF9RVUVSWSI6W1siYmxvZyIsImJsb2ciXSwiIl19','2019-01-18 11:23:54.088508'),('q4mslmi9hltyfkssvypq63tsb6gedvdp','NGU3YTdjMDBmZmY0MzQxNTJjZTUwMmY4NzQ5NGZhMGUzYTMzNDkwMTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNzc4ZjJjYmZmNmU3YTI5MDMyYjUwYzg5NzFjZDY2ZDQzYzIzY2Y2IiwiTElTVF9RVUVSWSI6W1siYmxvZyIsInVzZXJwcm9maWxlIl0sIiJdfQ==','2019-01-18 09:20:23.411876');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- 表的结构 `xadmin_bookmark`
+-- Table structure for table `xadmin_bookmark`
 --
 
+DROP TABLE IF EXISTS `xadmin_bookmark`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `xadmin_bookmark` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `url_name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `query` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_share` tinyint(1) NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `xadmin_bookmark_content_type_id_60941679_fk_django_co` (`content_type_id`),
+  KEY `xadmin_bookmark_user_id_42d307fc_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `xadmin_bookmark_content_type_id_60941679_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `xadmin_bookmark_user_id_42d307fc_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 表的结构 `xadmin_log`
+-- Dumping data for table `xadmin_bookmark`
 --
 
+LOCK TABLES `xadmin_bookmark` WRITE;
+/*!40000 ALTER TABLE `xadmin_bookmark` DISABLE KEYS */;
+/*!40000 ALTER TABLE `xadmin_bookmark` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `xadmin_log`
+--
+
+DROP TABLE IF EXISTS `xadmin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `xadmin_log` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
   `ip_addr` char(39) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `object_id` longtext COLLATE utf8mb4_unicode_ci,
@@ -421,387 +500,88 @@ CREATE TABLE `xadmin_log` (
   `action_flag` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `xadmin_log_content_type_id_2a6cb852_fk_django_content_type_id` (`content_type_id`),
+  KEY `xadmin_log_user_id_bb16a176_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `xadmin_log_content_type_id_2a6cb852_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `xadmin_log_user_id_bb16a176_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转存表中的数据 `xadmin_log`
+-- Dumping data for table `xadmin_log`
 --
 
-INSERT INTO `xadmin_log` (`id`, `action_time`, `ip_addr`, `object_id`, `object_repr`, `action_flag`, `message`, `content_type_id`, `user_id`) VALUES
-(1, '2018-12-23 20:04:39.522511', '127.0.0.1', '1', '有人问我 我就会讲 但是无人来(位于第100)', 'create', '已添加。', 11, 1),
-(2, '2018-12-23 21:05:52.454095', '127.0.0.1', '1', '有人问我 我就会讲 但是无人来(位于第100)', 'change', '修改 image', 11, 1),
-(3, '2018-12-23 22:30:32.523062', '127.0.0.1', '1', 'Python', 'create', '已添加。', 14, 1),
-(4, '2018-12-23 22:30:35.968241', '127.0.0.1', '2', '感悟', 'create', '已添加。', 14, 1),
-(5, '2018-12-23 22:30:38.558868', '127.0.0.1', '3', '随笔', 'create', '已添加。', 14, 1),
-(6, '2018-12-23 22:37:11.252560', '127.0.0.1', '4', 'Mark Sanders', 'create', '已添加。', 14, 1),
-(7, '2018-12-23 22:38:13.015534', '127.0.0.1', '1', '<Blog: Nature, in the broadest sense, is the natural, physical, or material world or universe.>', 'create', '已添加。', 13, 1),
-(8, '2018-12-23 22:40:00.874247', '127.0.0.1', '5', '转载', 'create', '已添加。', 14, 1),
-(9, '2018-12-23 22:41:10.831722', '127.0.0.1', '2', '<Blog: 如何评价 22 岁 MIT 博士生曹原获评 Nature 2018 年度十大人物之一，并居榜单首位？>', 'create', '已添加。', 13, 1),
-(10, '2018-12-23 22:42:38.380399', '127.0.0.1', '3', '<Blog: 《春江花月夜》为何被誉为“孤篇压全唐”？>', 'create', '已添加。', 13, 1),
-(11, '2018-12-24 13:39:38.946651', '127.0.0.1', '3', '<Blog: 《春江花月夜》为何被誉为“孤篇压全唐”？>', 'change', '修改 image', 13, 1),
-(12, '2018-12-24 13:39:49.816491', '127.0.0.1', '2', '<Blog: 如何评价 22 岁 MIT 博士生曹原获评 Nature 2018 年度十大人物之一，并居榜单首位？>', 'change', '修改 image', 13, 1),
-(13, '2018-12-24 13:40:07.490549', '127.0.0.1', '1', '<Blog: Nature, in the broadest sense, is the natural, physical, or material world or universe.>', 'change', '修改 image', 13, 1),
-(14, '2018-12-24 21:42:44.744086', '127.0.0.1', '1', '有人问我 我就会讲 但是无人来(位于第100)', 'change', '修改 image 和 url', 11, 1),
-(15, '2018-12-24 22:04:47.623602', '127.0.0.1', '2', '为你弹奏肖邦的夜曲  纪念我死去的爱情(位于第101)', 'create', '已添加。', 11, 1),
-(16, '2018-12-24 22:07:41.958941', '127.0.0.1', '3', '荣耀的背后刻著一道孤独(位于第102)', 'create', '已添加。', 11, 1),
-(17, '2018-12-24 22:08:21.325790', '127.0.0.1', '2', '为你弹奏肖邦的夜曲  纪念我死去的爱情(位于第101)', 'change', '修改 image', 11, 1),
-(18, '2018-12-24 22:48:00.058740', '127.0.0.1', '2', '为你弹奏肖邦的夜曲  纪念我死去的爱情(位于第101)', 'change', '修改 image', 11, 1),
-(19, '2018-12-24 22:48:17.984291', '127.0.0.1', '3', '荣耀的背后刻著一道孤独(位于第102)', 'change', '修改 image', 11, 1),
-(20, '2018-12-24 23:03:52.003097', '127.0.0.1', '2', '为你弹奏肖邦的夜曲  纪念我死去的爱情(位于第101)', 'change', '修改 image', 11, 1),
-(21, '2018-12-24 23:05:28.080107', '127.0.0.1', '3', '荣耀的背后刻著一道孤独(位于第102)', 'change', '修改 image', 11, 1),
-(22, '2018-12-27 15:47:01.077307', '127.0.0.1', '4', '<Blog: 孙悟空为什么不找如来报仇？>', 'create', '已添加。', 13, 1),
-(23, '2018-12-29 13:58:35.559678', '127.0.0.1', '5', '<Blog: 2qeq2q4eq>', 'create', '已添加。', 13, 1),
-(24, '2018-12-29 13:58:45.116444', '127.0.0.1', '6', '<Blog: awafsegterw12>', 'create', '已添加。', 13, 1),
-(25, '2018-12-29 13:58:53.575130', '127.0.0.1', '7', '<Blog: 2q3trfwqrw2>', 'create', '已添加。', 13, 1),
-(26, '2018-12-29 13:59:02.592635', '127.0.0.1', '8', '<Blog: wgtef3qwrqw>', 'create', '已添加。', 13, 1),
-(27, '2018-12-29 13:59:12.670794', '127.0.0.1', '9', '<Blog: gfthfgewsafwq>', 'create', '已添加。', 13, 1),
-(28, '2018-12-29 15:28:04.294041', '127.0.0.1', '10', '第10篇2018 年 12 月 27 日中国宣布北斗三号基本系统完成建设，将提供全球服务，这具有怎样的意义?博客', 'create', '已添加。', 13, 1),
-(29, '2018-12-29 15:28:42.770197', '127.0.0.1', '11', '第11篇2018-2019 跨年，你会怎么过呢？博客', 'create', '已添加。', 13, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `xadmin_log` WRITE;
+/*!40000 ALTER TABLE `xadmin_log` DISABLE KEYS */;
+INSERT INTO `xadmin_log` VALUES (1,'2019-01-02 19:57:12.151917','127.0.0.1','1','Python','create','已添加。',8,1),(2,'2019-01-02 19:57:58.632715','127.0.0.1','2','转载','create','已添加。',8,1),(3,'2019-01-02 19:58:36.696443','127.0.0.1','3','随笔','create','已添加。',8,1),(4,'2019-01-02 20:00:41.593419','127.0.0.1','4','影视','create','已添加。',8,1),(5,'2019-01-02 20:02:23.368398','127.0.0.1','5','独白','create','已添加。',8,1),(6,'2019-01-02 20:12:58.403095','127.0.0.1','4','影视','change','修改 image',8,1),(7,'2019-01-02 20:19:39.233443','127.0.0.1','1','root','create','已添加。',11,1),(8,'2019-01-02 20:20:24.800428','127.0.0.1','2','root','create','已添加。',11,1),(9,'2019-01-02 20:23:30.999099','127.0.0.1','1','2012(位于第100)','create','已添加。',9,1),(10,'2019-01-02 20:25:08.617233','127.0.0.1','2','Batman v Superman: Dawn of Justice(位于第101)','create','已添加。',9,1),(11,'2019-01-02 20:26:18.759954','127.0.0.1','3','The Bourne Identity(位于第102)','create','已添加。',9,1),(12,'2019-01-02 20:39:04.520012','127.0.0.1','1','root','change','修改 last_login，first_name，last_name，email，text1，text2，text3 和 image',6,1),(13,'2019-01-02 20:55:56.735406','127.0.0.1','1','root','change','修改 last_login 和 image',6,1),(14,'2019-01-02 21:30:09.931609','127.0.0.1','1','root','change','修改 text1 和 text2',6,1),(15,'2019-01-03 22:12:29.320355','127.0.0.1','1','root','change','修改 text1，text2 和 text3',6,1),(16,'2019-01-04 08:24:00.275873','127.0.0.1','1','root','change','修改 text3',6,1),(17,'2019-01-04 08:24:20.866779','127.0.0.1','5','独白','change','没有字段被修改。',8,1),(18,'2019-01-04 10:52:45.415684','127.0.0.1','1','root','change','修改 text1 和 text2',6,1),(19,'2019-01-04 10:59:57.115181','127.0.0.1','4','影视','change','修改 image',8,1),(20,'2019-01-04 11:15:36.652704','127.0.0.1','1','第1篇苹果公司下调 2019 第一财季业绩指导，预计收入约 840 亿美元，传递出哪些信息？博客','create','已添加。',7,1),(21,'2019-01-04 11:16:27.258494','127.0.0.1','2','第2篇苹果公司下调 2019 第一财季业绩指导，预计收入约 840 亿美元，传递出哪些信息？博客','create','已添加。',7,1),(22,'2019-01-04 11:16:40.083938','127.0.0.1','2','第2篇苹果公司下调 2019 第一财季业绩指导，预计收入约 840 亿美元，传递出哪些信息？博客','change','修改 author',7,1),(23,'2019-01-04 11:19:56.345220','127.0.0.1','3','第3篇蜘蛛侠：平行宇宙 Spider-Man: Into the Spider-Verse博客','create','已添加。',7,1),(24,'2019-01-04 11:23:53.855832','127.0.0.1','4','第4篇万字长文深度解析Python装饰器博客','create','已添加。',7,1);
+/*!40000 ALTER TABLE `xadmin_log` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- 表的结构 `xadmin_usersettings`
+-- Table structure for table `xadmin_usersettings`
 --
 
+DROP TABLE IF EXISTS `xadmin_usersettings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `xadmin_usersettings` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `xadmin_usersettings_user_id_edeabe4a_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `xadmin_usersettings_user_id_edeabe4a_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转存表中的数据 `xadmin_usersettings`
+-- Dumping data for table `xadmin_usersettings`
 --
 
-INSERT INTO `xadmin_usersettings` (`id`, `key`, `value`, `user_id`) VALUES
-(1, 'dashboard:home:pos', '', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `xadmin_usersettings` WRITE;
+/*!40000 ALTER TABLE `xadmin_usersettings` DISABLE KEYS */;
+INSERT INTO `xadmin_usersettings` VALUES (1,'dashboard:home:pos','',1);
+/*!40000 ALTER TABLE `xadmin_usersettings` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- 表的结构 `xadmin_userwidget`
+-- Table structure for table `xadmin_userwidget`
 --
 
+DROP TABLE IF EXISTS `xadmin_userwidget`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `xadmin_userwidget` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `widget_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `xadmin_userwidget_user_id_c159233a_fk_blog_userprofile_id` (`user_id`),
+  CONSTRAINT `xadmin_userwidget_user_id_c159233a_fk_blog_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `blog_userprofile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- 转储表的索引
+-- Dumping data for table `xadmin_userwidget`
 --
 
---
--- 表的索引 `auth_group`
---
-ALTER TABLE `auth_group`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+LOCK TABLES `xadmin_userwidget` WRITE;
+/*!40000 ALTER TABLE `xadmin_userwidget` DISABLE KEYS */;
+/*!40000 ALTER TABLE `xadmin_userwidget` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- 表的索引 `auth_group_permissions`
---
-ALTER TABLE `auth_group_permissions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
-  ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
-
---
--- 表的索引 `auth_permission`
---
-ALTER TABLE `auth_permission`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
-
---
--- 表的索引 `auth_user`
---
-ALTER TABLE `auth_user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- 表的索引 `auth_user_groups`
---
-ALTER TABLE `auth_user_groups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
-  ADD KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`);
-
---
--- 表的索引 `auth_user_user_permissions`
---
-ALTER TABLE `auth_user_user_permissions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
-  ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
-
---
--- 表的索引 `blog_blog`
---
-ALTER TABLE `blog_blog`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `blog_blog_blog_type_id_de11bd65_fk_blog_blogtype_id` (`blog_type_id`);
-
---
--- 表的索引 `blog_blogtype`
---
-ALTER TABLE `blog_blogtype`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `blog_homebanner`
---
-ALTER TABLE `blog_homebanner`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `blog_myself`
---
-ALTER TABLE `blog_myself`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `django_admin_log`
---
-ALTER TABLE `django_admin_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
-  ADD KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`);
-
---
--- 表的索引 `django_content_type`
---
-ALTER TABLE `django_content_type`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
-
---
--- 表的索引 `django_migrations`
---
-ALTER TABLE `django_migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `django_session`
---
-ALTER TABLE `django_session`
-  ADD PRIMARY KEY (`session_key`),
-  ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
-
---
--- 表的索引 `xadmin_bookmark`
---
-ALTER TABLE `xadmin_bookmark`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `xadmin_bookmark_content_type_id_60941679_fk_django_co` (`content_type_id`),
-  ADD KEY `xadmin_bookmark_user_id_42d307fc_fk_auth_user_id` (`user_id`);
-
---
--- 表的索引 `xadmin_log`
---
-ALTER TABLE `xadmin_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `xadmin_log_content_type_id_2a6cb852_fk_django_content_type_id` (`content_type_id`),
-  ADD KEY `xadmin_log_user_id_bb16a176_fk_auth_user_id` (`user_id`);
-
---
--- 表的索引 `xadmin_usersettings`
---
-ALTER TABLE `xadmin_usersettings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `xadmin_usersettings_user_id_edeabe4a_fk_auth_user_id` (`user_id`);
-
---
--- 表的索引 `xadmin_userwidget`
---
-ALTER TABLE `xadmin_userwidget`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `xadmin_userwidget_user_id_c159233a_fk_auth_user_id` (`user_id`);
-
---
--- 在导出的表使用AUTO_INCREMENT
---
-
---
--- 使用表AUTO_INCREMENT `auth_group`
---
-ALTER TABLE `auth_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `auth_group_permissions`
---
-ALTER TABLE `auth_group_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `auth_permission`
---
-ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
-
---
--- 使用表AUTO_INCREMENT `auth_user`
---
-ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `auth_user_groups`
---
-ALTER TABLE `auth_user_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `auth_user_user_permissions`
---
-ALTER TABLE `auth_user_user_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `blog_blog`
---
-ALTER TABLE `blog_blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- 使用表AUTO_INCREMENT `blog_blogtype`
---
-ALTER TABLE `blog_blogtype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- 使用表AUTO_INCREMENT `blog_homebanner`
---
-ALTER TABLE `blog_homebanner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- 使用表AUTO_INCREMENT `blog_myself`
---
-ALTER TABLE `blog_myself`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `django_admin_log`
---
-ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `django_content_type`
---
-ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- 使用表AUTO_INCREMENT `django_migrations`
---
-ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- 使用表AUTO_INCREMENT `xadmin_bookmark`
---
-ALTER TABLE `xadmin_bookmark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `xadmin_log`
---
-ALTER TABLE `xadmin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- 使用表AUTO_INCREMENT `xadmin_usersettings`
---
-ALTER TABLE `xadmin_usersettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `xadmin_userwidget`
---
-ALTER TABLE `xadmin_userwidget`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 限制导出的表
---
-
---
--- 限制表 `auth_group_permissions`
---
-ALTER TABLE `auth_group_permissions`
-  ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
-
---
--- 限制表 `auth_permission`
---
-ALTER TABLE `auth_permission`
-  ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
-
---
--- 限制表 `auth_user_groups`
---
-ALTER TABLE `auth_user_groups`
-  ADD CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
-  ADD CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- 限制表 `auth_user_user_permissions`
---
-ALTER TABLE `auth_user_user_permissions`
-  ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- 限制表 `blog_blog`
---
-ALTER TABLE `blog_blog`
-  ADD CONSTRAINT `blog_blog_blog_type_id_de11bd65_fk_blog_blogtype_id` FOREIGN KEY (`blog_type_id`) REFERENCES `blog_blogtype` (`id`);
-
---
--- 限制表 `django_admin_log`
---
-ALTER TABLE `django_admin_log`
-  ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- 限制表 `xadmin_bookmark`
---
-ALTER TABLE `xadmin_bookmark`
-  ADD CONSTRAINT `xadmin_bookmark_content_type_id_60941679_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  ADD CONSTRAINT `xadmin_bookmark_user_id_42d307fc_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- 限制表 `xadmin_log`
---
-ALTER TABLE `xadmin_log`
-  ADD CONSTRAINT `xadmin_log_content_type_id_2a6cb852_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  ADD CONSTRAINT `xadmin_log_user_id_bb16a176_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- 限制表 `xadmin_usersettings`
---
-ALTER TABLE `xadmin_usersettings`
-  ADD CONSTRAINT `xadmin_usersettings_user_id_edeabe4a_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- 限制表 `xadmin_userwidget`
---
-ALTER TABLE `xadmin_userwidget`
-  ADD CONSTRAINT `xadmin_userwidget_user_id_c159233a_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-01-04 15:37:22

@@ -8,7 +8,12 @@
    <section id="page-header">
    	<div class="row current-cat">
    		<div class="col-full">
+            {% ifequal name None %}
+   			<h1>keyword: {{ keyword }}</h1>
+                {% else %}
    			<h1>Category: {{ name }}</h1>
+
+            {% endifequal %}
    		</div>   		
    	</div>
    </section>
@@ -31,8 +36,8 @@
          	<article class="brick entry format-standard animate-this">
                <div class="entry-thumb">
                   <a href="{% url 'blog:blog_detail' category.id %}" class="thumb-link">
-{#	                        <img src="{{ MEDIA_URL }}{{ category.image }}" alt="building">#}
-	                        <img src="{{ MEDIA_URL }}{{ category.image }}">
+	                        <img src="{{ MEDIA_URL }}{{ category.image }}" alt="building">
+{#	                        <img src="{{ MEDIA_URL }}{{ category.image }}">#}
                   </a>
                </div>
                                           {% else %}
@@ -51,7 +56,7 @@
                		<h1 class="entry-title"><a href="{% url 'blog:blog_detail' category.id %}">{{ category.title }}</a></h1>
                		
                	</div>
-						<div class="entry-excerpt">{{ category.content|truncatechars:"100" }}</div>
+						<div class="entry-excerpt">{{ category.conFtent|truncatechars:"100" }}</div>
                </div>
 
         		</article>

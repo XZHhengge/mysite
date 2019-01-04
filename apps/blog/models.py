@@ -59,6 +59,7 @@ class BolgBanner(models.Model):
 class BlogType(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, verbose_name="用户名")
     type_name = models.CharField(max_length=50, verbose_name='博客类型')
+    # type_title = models.CharField(max_length=200, verbose_name='博客标题', blank=True)
     image = models.ImageField(upload_to='Blog_type/%Y/%m', verbose_name='分类插图', max_length=100,
                               blank=True, null=True)
 
@@ -78,11 +79,11 @@ class Blog(models.Model):
     content = models.TextField(verbose_name='内容', blank=True)
     created_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图',
-                              max_length=100, null=True, blank=True)
+                              max_length=100, null=True, blank=True, default=u"")
     last_updated_time = models.DateTimeField(default=datetime.now, verbose_name='最后更新时间')
     response_count = models.IntegerField(default=0, verbose_name='回复数')
     click_number = models.IntegerField(default=0, verbose_name='点击数')
-    blog_url = models.CharField(max_length=50, verbose_name='博客链接', blank=True)
+    blog_url = models.CharField(max_length=50, verbose_name='博客链接', blank=True, null=True)
 
     class Meta:
         verbose_name = '博客'

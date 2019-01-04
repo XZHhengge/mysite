@@ -51,7 +51,7 @@
                 <!--Author Widget-->
                 <aside class="row m0 widget-author widget has-pt">
                     <div class="widget-author-inner row">
-                        <div class="author-avatar row"><a href="#"><img src="{% static 'images/author.png' %}" alt=""
+                        <div class="author-avatar row"><a href="#"><img src="{% static '/images/author.png' %}" alt=""
                                                                         class="img-circle"></a></div>
                         <a href="#"><h2 class="author-name">Mark Sanders</h2></a>
                         <h5 class="author-title">small title</h5>
@@ -67,11 +67,37 @@
                         <li><a href="#"><i class="fa fa-envelope"></i></a></li>
                     </ul>
                 </aside>
-                                {% block widget %}
-                    {% endblock %}
-            {% include 'base_widget.html' %}
-                <!--Twitter Widget-->
-{#                {{ for card in cards }}#}
+
+
+{#                 <!--Twitter Widget-->            #}
+{##}
+{#<aside class="col-sm-4 widget widget-twitter widget-with-posts post">#}
+{##}
+{#    <div class="widget-twitter-inner">#}
+{#        <h5 class="widget-meta"><i class="fa fa-twitter"></i>{{ card.card_name }}</h5>#}
+{#        <div class="row tweet-texts">#}
+{#            <p>Check out new post on my blog</p>#}
+{#            <p><a href="{{ card.card_url }}">{{ card.card_title }}</a></p>#}
+{#        </div>#}
+{#        <div class="row timepast">1 day ago</div>#}
+{#    </div>#}
+{##}
+{#</aside>#}
+{#    {% endfor %}#}
+                <!--Twitter Widget-->{% for card in cards %}
+                <aside class="row m0 widget widget-twitter">
+                    <div class="widget-twitter-inner">
+                        <h5 class="widget-meta"><i class="fa fa-twitter"></i>{{ card.card_name }}
+                            <a href="{{ card.card_url }}">{{ card.card_title }}</a></h5>
+                        <div class="row tweet-texts">
+                            <p>Check out new post on my blog
+                                <a href="http://twitter.com/#natureshot">#natureshot</a>
+                                <a href="http://bit.ly/blog">http://bit.ly/blog</a></p>
+                        </div>
+                        <div class="row timepast">1 day ago</div>
+                    </div>
+                </aside>
+                {% endfor %}
 {#                <aside class="row m0 widget widget-twitter">#}
 {#                    <div class="widget-twitter-inner">#}
 {#                        <h5 class="widget-meta"><i class="fa fa-twitter"></i>Twitter feed#}

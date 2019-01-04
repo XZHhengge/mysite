@@ -23,7 +23,7 @@ class BlogHome(View):
         p = Paginator(all_blog, 10, request=request)
         all_blog = p.page(page)
 
-        return render(request, 'blog.html', {'all_blog': all_blog, 'blog_banner': blog_banner, 'user':user})
+        return render(request, 'blog.html', {'all_blog': all_blog, 'blog_banner': blog_banner, })
 
 
 # 博客详细页面
@@ -40,6 +40,7 @@ class CategoryDetail(View):
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
+            # 取到该博客分类的类别名
         name = blog_category[0].blog_type
         p = Paginator(blog_category, 10, request=request)
         blog_category = p.page(page)
@@ -74,7 +75,6 @@ class Single(View):
 class Search(View):
 
     def get(self, request):
-        bar = BlogType.objects.all()
         search = request.GET.get('search','')
         search_blog = Blog.objects.filter(Q(title__icontains=search)|Q(content__icontains=search)|Q(blog_type__type_name__icontains=search))
         try:
@@ -85,7 +85,7 @@ class Search(View):
         p = Paginator(search_blog, 10, request=request)
         search_blog = p.page(page)
 
-        return render(request, 'blog.html', {'all_blog': search_blog, 'bar':bar})
+        return render(request, 'category.html', {'blog_category': search_blog, 'keyword': search})
 
     def post(self, request):
         pass
