@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.views import View
 
 
@@ -37,3 +37,17 @@ class Contact(View):
 
         return render(request, 'contact.html',
                       {'titlename': 'Contact', 'cards': cards})
+
+
+# 全局处理404页面
+def page_not_found(request):
+    response = render_to_response('404.html', {})
+    response.status_code = 404
+    return response
+
+
+# 全局处理500页面
+def page_error(request):
+    response = render_to_response('500.html', {})
+    response.status_code = 500
+    return response

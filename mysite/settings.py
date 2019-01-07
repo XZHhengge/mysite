@@ -43,14 +43,17 @@ INSTALLED_APPS = [
     'blog',
     'xadmin',
     'crispy_forms',
-    'pure_pagination'
+    'pure_pagination',
+    'markdown_editor',
+    'markdownx'
+    # 'DjangoUeditor'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -146,3 +149,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MARKDOWN_IMAGE_FLODER='markdown'
+MARKDOWN_IMAGE_FORMATS=["jpg", "jpeg", "gif", "png", "bmp", "webp"]
+
