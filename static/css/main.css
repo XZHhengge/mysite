@@ -236,13 +236,13 @@ pre {
 	background: #EAEAEA;
 	margin: 4.2rem 0;
 }
-code {
-	font-size: 1.4rem;
-	margin: 0 .2rem;
-	padding: .3rem .6rem;
-	white-space: nowrap;
-	background: #EAEAEA;
-}
+/*code {*/
+	/*font-size: 1.4rem;*/
+	/*margin: 0 .2rem;*/
+	/*padding: .3rem .6rem;*/
+	/*white-space: nowrap;*/
+	/*background: #EAEAEA;*/
+/*}*/
 pre > code {
 	display: block;
 	white-space: pre;

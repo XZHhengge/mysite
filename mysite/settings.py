@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'pure_pagination',
     'markdown_editor',
-    'markdownx'
+    # 'markdownx'
     # 'DjangoUeditor'
 ]
 

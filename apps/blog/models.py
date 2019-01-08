@@ -4,8 +4,6 @@ from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# from DjangoUeditor.models import UEditorField
-# from markdown_editor.models import
 
 # 个人信息
 class UserProfile(AbstractUser):
@@ -76,12 +74,9 @@ class BlogType(models.Model):
 class Blog(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, verbose_name="用户名")
     author = models.CharField(max_length=30, verbose_name='作者', blank=True)
-    title = models.TextField(verbose_name='标题', blank=True)
+    title = models.CharField(verbose_name='标题', blank=True, max_length=300)
     blog_type = models.ForeignKey(BlogType,on_delete=models.DO_NOTHING, verbose_name='博客类型')
     content = models.TextField(verbose_name='内容', blank=True)
-    # content = MarkdownxField(verbose_name='内容', blank=True)
-    # content = UEditorField(verbose_name='博客正文', blank=True,imagePath="blog/images/%Y/%m",
-    #                        filePath="blog/file/%Y/%m")
     created_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图',
                               max_length=100, null=True, blank=True, default=u"")

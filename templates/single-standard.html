@@ -28,15 +28,17 @@
 
 
                         {#          博客显示                     #}
-                        <link rel="stylesheet" href="{% static 'css/editormd.preview.css' %}" />
-                        						<p class="lead">
+<link rel="stylesheet" href="{% static 'css/editormd.css' %}" />
 
-                        <div id="editormd-view">
-                            <textarea id="append-test" style="display:none;">
-                            {{ blog.content }}
-
-                            </textarea></div>
-                        </p>
+<div id="editormd-view">
+<textarea id="append-test" style="display:none;">{{ blog.content }}</textarea></div>
+{#<link rel="stylesheet" href="{% static 'css/editormd.css' %}"/>#}
+{#                        <div id="editormd">#}
+{#                            <textarea style="display: none;">#}
+{#                                ### Hello Editor.md !#}
+{#                                {{ blog.content }}#}
+{#                            </textarea>#}
+{#                        </div>#}
 
 		  			   <div class="author-profile">
 
@@ -280,13 +282,22 @@
 <script type="text/javascript">
     $(function() {
         editormd.markdownToHTML("editormd-view", {
-            htmlDecode  : "style,script,iframe",
-            emoji       : true,
-            taskList    : true,
-            flowChart   : true,
-            tex         : true,
-            sequenceDiagram : true,
+                    theme :"light",
+                    previewTheme : "light",
+                    editorTheme : "paraiso-light",
+                    syncScrolling : "single",
+                    saveHTMLToTextarea :  true,
+                    emoji: true,
+                    taskList: true,
+                    tocm: true,
+                    tex: true,
+                    flowChart: true,
+                    sequenceDiagram: true,
+                    codeFold: true,
+            path : "{% static 'markdown_editor/lib' %}"
         });
     });
 </script>
+
 {% endblock %}
+
