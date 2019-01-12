@@ -29,7 +29,7 @@ class HomeBanner(models.Model):
                               max_length=100, null=True, blank=True)
     url = models.URLField(max_length=200, verbose_name='访问地址', null=True, blank=True)
     index = models.IntegerField(default=100, verbose_name='顺序')
-    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
 
     class Meta:
         verbose_name = '首页轮播图'
@@ -46,7 +46,7 @@ class BolgBanner(models.Model):
     image = models.ImageField(upload_to='blog_banner/%Y/%m', verbose_name='博客轮播图',
                               max_length=100, blank=True)
     index = models.IntegerField(default=100, verbose_name='顺序')
-    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
 
     class Meta:
         verbose_name = '博客轮播图'
@@ -77,7 +77,7 @@ class Blog(models.Model):
     title = models.CharField(verbose_name='标题', blank=True, max_length=300)
     blog_type = models.ForeignKey(BlogType,on_delete=models.DO_NOTHING, verbose_name='博客类型')
     content = models.TextField(verbose_name='内容', blank=True)
-    created_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
     image = models.ImageField(upload_to='homeblogimage/%Y/%m', verbose_name='首页博客缩图',
                               max_length=100, null=True, blank=True, default=u"")
     last_updated_time = models.DateTimeField(default=datetime.now, verbose_name='最后更新时间')
@@ -107,3 +107,7 @@ class PersonCard(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# 评论功能
+# class Comment(models.Model):

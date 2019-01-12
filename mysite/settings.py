@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
-
+import time
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -92,6 +92,7 @@ DATABASES = {
         'USER': 'root',
         # 'USER': 'debian-sys-maint',
         'PASSWORD': '159874xzh',
+        # 'PASSWORD': 'ScD8EceNeeoI8JeO',  # 服务器
         'HOST': '127.0.0.1'
     }
     # 'default': {
@@ -150,6 +151,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MARKDOWN_IMAGE_FLODER='markdown'
-MARKDOWN_IMAGE_FORMATS=["jpg", "jpeg", "gif", "png", "bmp", "webp"]
+# 根据年月来创建markdown上传的图片
+year=time.strftime('%Y',time.localtime(time.time()))
+month=time.strftime('%m',time.localtime(time.time()))
+MARKDOWN_IMAGE_FLODER = 'markdown/{}/{}'.format(year,month)
+MARKDOWN_IMAGE_FORMATS = ["jpg", "jpeg", "gif", "png", "bmp", "webp"]
 

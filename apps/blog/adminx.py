@@ -45,7 +45,8 @@ class HomeBannerAdmin(object):
     list_display = ['title', 'image', 'url', 'index', 'add_time']
     search_fileds = ['title', 'image', 'url', 'index']
     list_filter = ['title', 'image', 'url', 'index', 'add_time']
-
+    # 后台隐藏
+    # exclude = ['add_time']
 
 class BlogTypeAdmin(object):
     list_display = ['type_name']
@@ -61,6 +62,7 @@ class BlogAdmin(object):
     # formfield_overrides = {models.TextField: {'widget': AdminMarkdownxWidget}, }
     # style_fields = {"content": "markdownx"}
     # style_fields = {"content": "ueditor"}
+    # exclude = ['created_time']
 
 
 class BlogBannerAdmin(object):

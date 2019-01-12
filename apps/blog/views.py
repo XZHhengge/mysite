@@ -1,3 +1,4 @@
+import re
 from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic.base import View
@@ -76,7 +77,8 @@ class Search(View):
 
     def get(self, request):
         search = request.GET.get('search','')
-        search_blog = Blog.objects.filter(Q(title__icontains=search)|Q(content__icontains=search)|Q(blog_type__type_name__icontains=search))
+        search_blog = Blog.objects.filter(Q(title__icontains=search) |
+                                          Q(content__icontains=search) |Q(blog_type__type_name__icontains=search))
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:

@@ -13,7 +13,11 @@
 
    				<div class="content-media">
 						<div class="post-thumb">
+                            {% ifnotequal blog.image|length 0 %}
+                            <img src="{{ MEDIA_URL }}{{ blog.image }}">
+                                {% else %}
 							<img src="{% static 'images/featured-posts/3.jpg' %}">
+                            {% endifnotequal %}
 						</div>  
 					</div>
 
@@ -26,12 +30,15 @@
 							<li class="cat"><a href="">{{ blog.author }}</a><a href="{% url 'blog:blog_detail' blog.blog_type_id %}">{{ blog.blog_type }}</a></li>
 						</ul>
 
-
+{#{% block css %}#}
                         {#          博客显示                     #}
 <link rel="stylesheet" href="{% static 'css/editormd.css' %}" />
-
+{#{% endblock %}#}
 <div id="editormd-view">
 <textarea id="append-test" style="display:none;">{{ blog.content }}</textarea></div>
+
+
+
 {#<link rel="stylesheet" href="{% static 'css/editormd.css' %}"/>#}
 {#                        <div id="editormd">#}
 {#                            <textarea style="display: none;">#}
@@ -294,6 +301,20 @@
                     flowChart: true,
                     sequenceDiagram: true,
                     codeFold: true,
+                    {#width   : "100%",#}
+                    {#height  : "540",#}
+                    {#theme :"light",#}
+                    {#previewTheme : "light",#}
+                    {#editorTheme : "paraiso-light",#}
+                    {#syncScrolling : "single",#}
+                    {#saveHTMLToTextarea :  true,#}
+                    {#emoji: true,#}
+                    {#taskList: true,#}
+                    {#tocm: true,#}
+                    {#tex: true,#}
+                    {#flowChart: true,#}
+                    {#sequenceDiagram: true,#}
+                    {#codeFold: true,#}
             path : "{% static 'markdown_editor/lib' %}"
         });
     });
