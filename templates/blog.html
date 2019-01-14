@@ -81,7 +81,12 @@
                		<h1 class="entry-title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h1>
 
                	</div>
-						<div class="entry-excerpt">{{ blog.content|truncatechars:"100" }}</div>
+{#						<div class="entry-excerpt">{{ blog.content|truncatechars:"100" }}</div>#}
+						<div class="entry-excerpt">{{ blog.content|re_content }}</div>
+
+                            <div class="response-count">
+                                <img src="{% static '/images/comment-icon-gray.png' %}" alt="">{{ blog.response_count }}
+                            </div>
                </div>
 
         		</article> <!-- end article -->

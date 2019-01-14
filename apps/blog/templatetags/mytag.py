@@ -20,7 +20,7 @@ def subtract(value, arg):
 # 正则匹配文章的图片
 @register.filter
 def image_url(value):
-    """re the image url from blog content"""
+    """re the image url the from blog content"""
     try:
         pattern = re.compile(r'(/.*?(jpg|webp|png|jpeg|gif|bmp))', re.I)
         url = re.search(pattern, value)
@@ -30,3 +30,23 @@ def image_url(value):
         return None
 
 
+# 正则匹配文章的中文内容
+@register.filter
+def re_content(value):
+    """re the chinese content from the blog content"""
+    try:
+        re_image = re.search('png|ebp|jpg|peg|gif|bmp', value).span()[0]
+
+        # print(re.findall('[\u4e00-\u9fa5]', str2))
+        return value[re_image+5:120]
+    # 如果没有图片
+    except AttributeError:
+        # 还有图片
+        # if re.search('png|ebp|jpg|peg|gif|bmp', value):
+        #     return '莫思身外无穷事,且尽生前有限杯.'
+        # print(e)
+        # pattern = re.compile('[\u4e00-\u9fa5]')
+        # content = re.findall(pattern, value)
+
+        # return ''.join(content[:54])+'......'
+        return value[:120]

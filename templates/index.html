@@ -33,13 +33,12 @@
                     <div class="featured-content row">
 {#                        <a href="{% url 'blog:blog_detail' 5 %}"><img src="{% static 'images/posts/masonry/1.jpg' %}" alt="" class="img-responsive"></a>#}
                         <a href="{% url 'blog:blog_detail' blog.id %}">
-                        
                             {% if blog.image|length != 0 %}
                             <img src="{{ MEDIA_URL }}{{ blog.image }}" alt="" class="img-responsive">
                             {% elif blog.content|image_url != None %}
                             <img src="{{ blog.content|image_url }}"  alt="" class="img-responsive">
                             {% else %}
-                                <img src="{% static 'images/posts/masonry/1.jpg' %}"  alt="" class="img-responsive"></a></div>
+                                <img src="{% static 'images/posts/masonry/1.jpg' %}"  alt="" class="img-responsive"></a>
                         {% endif %}
                     </div>
                     <div class="post-excerpt row">
@@ -48,7 +47,7 @@
                             <span class="post-author"><i>by</i><a href="{% url 'blog:category' %}">{{ blog.author }}</a></span>
                         </h5>
                         <h3 class="post-title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h3>
-                        <p>{{ blog.content|truncatewords:"1" }}</p>
+                        <p>{{ blog.content|re_content|truncatewords:"1" }}</p>
                         <footer class="row">
                             <h5 class="taxonomy"><i>in</i> <a href="#">image</a>,
                                 <a href="#">{{ blog.blog_type }}</a></h5>
@@ -59,8 +58,6 @@
                 </div>
             </article>
                                         {% endfor %}
-
-
                                 <!--Author Widget-->
 <aside class="col-sm-4 widget-author widget widget-with-posts post">
     <div class="widget-author-inner row">
