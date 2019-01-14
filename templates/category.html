@@ -1,4 +1,5 @@
 {% extends 'blog_base.html' %}
+{% load mytag %}
 {% load staticfiles %}
 {% block title %}
 
@@ -30,14 +31,24 @@
 
          	<div class="grid-sizer"></div>
                         {# 用循环到处选中分类的博客           #}
-            {% for category in blog_category.object_list %}
-                {% ifnotequal category.image|length None %}
+            {% for blog in all_blog.object_list %}
+                {% ifnotequal blog.image|length None %}
 
          	<article class="brick entry format-standard animate-this">
                <div class="entry-thumb">
-                  <a href="{% url 'blog:blog_detail' category.id %}" class="thumb-link">
-	                        <img src="{{ MEDIA_URL }}{{ category.image }}" alt="building">
-{#	                        <img src="{{ MEDIA_URL }}{{ category.image }}">#}
+                  <a href="{% url 'blog:blog_detail' blog.id %}" class="thumb-link">
+	                                                 {#              优先级：封面图->文章图->默认图          #}
+                      {% if blog.image|length != 0 %}
+                                                {#           封面图               #}
+                                        <img src="{{ MEDIA_URL }}{{ blog.image }}" alt="building" >
+
+                        {% elif blog.content|image_url != None %}
+                                                {#              文章图                   #}
+                                        <img src="{{ blog.content|image_url }}"  alt="building" >
+                          {% else %}
+                                    {#                  默认图                              #}
+                          <img src="{% static '/images/thumbs/wall-clock.jpg' %}" alt="building">
+                      {% endif %}
                   </a>
                </div>
                                           {% else %}
@@ -48,15 +59,15 @@
 
                		<div class="entry-meta">
                			<span class="cat-links">
-               				<a href="#">{{ category.created_time }}</a>
-               				<a href="{% url 'blog:category' %}">{{ category.blog_type }}</a>
+               				<a href="#">{{ blog.created_time }}</a>
+               				<a href="{% url 'blog:blog' %}">{{ blog.blog_type }}</a>
                			</span>			
                		</div>
 
-               		<h1 class="entry-title"><a href="{% url 'blog:blog_detail' category.id %}">{{ category.title }}</a></h1>
+               		<h1 class="entry-title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h1>
                		
                	</div>
-						<div class="entry-excerpt">{{ category.conFtent|truncatechars:"100" }}</div>
+						<div class="entry-excerpt">{{ blog.content|re_content }}</div>
                </div>
 
         		</article>
@@ -70,12 +81,12 @@
                         {#            分页功能#}
    	<div class="row">
    		<nav class="pagination">
-        {% if blog_category.has_previous %}
-             <a href="?{{ blog_category.previous_page_number.querystring }}"  class="page-numbers next">Prev</a>
+        {% if all_blog.has_previous %}
+             <a href="?{{ all_blog.previous_page_number.querystring }}"  class="page-numbers next">Prev</a>
             {% endif %}
-            {% for page in blog_category.pages %}
+            {% for page in all_blog.pages %}
                     {% if page %}
-                        {% ifequal page blog_category.number %}
+                        {% ifequal page all_blog.number %}
                             <span class="page-numbers current">{{ page }}</span>
                         {% else %}
                             <a href="?{{ page.querystring }}" class="page-numbers">{{ page }}</a>
@@ -84,8 +95,8 @@
                         ...
                     {% endif %}
                 {% endfor %}
-                {% if blog_category.has_next %}
-                    <a href="?{{ blog_category.next_page_number.querystring }}" class="page-numbers next">Next</a>
+                {% if all_blog.has_next %}
+                    <a href="?{{ all_blog.next_page_number.querystring }}" class="page-numbers next">Next</a>
                 {% endif %}
 	      </nav>
    	</div>

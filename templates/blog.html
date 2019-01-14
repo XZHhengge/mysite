@@ -53,6 +53,7 @@
 
                <div class="entry-thumb">
                   <a href="{% url 'blog:blog_detail' blog.id %}" class="thumb-link">
+                              {#              优先级：封面图->文章图->默认图          #}
                       {% if blog.image|length != 0 %}
                                                 {#           封面图               #}
                                         <img src="{{ MEDIA_URL }}{{ blog.image }}" alt="building" >
@@ -62,10 +63,9 @@
                                         <img src="{{ blog.content|image_url }}"  alt="building" >
                           {% else %}
                                     {#                  默认图                              #}
-                          <img src="{% static '/images/thumbs/diagonal-building.jpg' %}" alt="building"></a>
-
-
-                            {% endif %}
+                          <img src="{% static '/images/thumbs/diagonal-building.jpg' %}" alt="building">
+                      {% endif %}
+                          </a>
                </div>
 
                <div class="entry-text">

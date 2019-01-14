@@ -24,7 +24,6 @@ def image_url(value):
     try:
         pattern = re.compile(r'(/.*?(jpg|webp|png|jpeg|gif|bmp))', re.I)
         url = re.search(pattern, value)
-        print(url.group(1))
         return url.group(1)
     except Exception:
         return None

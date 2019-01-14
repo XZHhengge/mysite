@@ -45,7 +45,7 @@ class CategoryDetail(View):
         name = blog_category[0].blog_type
         p = Paginator(blog_category, 10, request=request)
         blog_category = p.page(page)
-        return render(request, 'category.html', {'blog_category': blog_category, 'name': name})
+        return render(request, 'category.html', {'all_blog': blog_category, 'name': name})
 
 
 # 博客分类
