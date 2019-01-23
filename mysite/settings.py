@@ -89,7 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysite',
-        'USER': 'root',
+        'USER': 'mysiteuser',
         # 'USER': 'debian-sys-maint',
         'PASSWORD': '159874xzh',
         # 'PASSWORD': 'ScD8EceNeeoI8JeO',  # 服务器
